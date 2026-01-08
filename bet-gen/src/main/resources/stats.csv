@@ -1,0 +1,99 @@
+TeamName,AvgTotalGoals,BTTS_Rate,WinRate
+Manchester United,3.1,0.58,0.42
+Manchester City,3.6,0.63,0.50
+Liverpool,3.8,0.63,0.50
+Arsenal,2.3,0.57,0.43
+Chelsea,3.3,0.65,0.45
+Tottenham Hotspur,3.4,0.60,0.40
+Newcastle United,3.2,0.55,0.45
+Brighton and Hove Albion,2.9,0.60,0.35
+Nottingham Forest,2.8,0.45,0.40
+Brentford,3.4,0.70,0.38
+Fulham,2.9,0.65,0.35
+Bournemouth,3.2,0.62,0.32
+Aston Villa,2.8,0.58,0.28
+Everton,2.4,0.40,0.28
+Crystal Palace,2.5,0.50,0.25
+West Ham United,3.1,0.65,0.22
+Sunderland,2.7,0.55,0.35
+Burnley,2.6,0.50,0.22
+Leicester City,2.8,0.55,0.15
+Ipswich Town,3.5,0.60,0.15
+Southampton,3.6,0.65,0.12
+Leeds United,2.7,0.55,0.10
+Inter Milan,3.0,0.27,0.64
+Napoli,2.4,0.45,0.64
+AC Milan,2.5,0.45,0.72
+Lazio,2.6,0.36,0.55
+Atalanta,2.6,0.64,0.27
+Como,2.6,0.45,0.55
+Juventus,2.1,0.55,0.45
+AS Roma,1.8,0.18,0.64
+Bologna,2.2,0.45,0.45
+Torino,2.5,0.45,0.27
+Fiorentina,2.4,0.64,0.18
+Sassuolo,2.6,0.55,0.27
+Udinese,2.1,0.45,0.45
+Verona,2.3,0.45,0.18
+Parma,2.0,0.45,0.27
+Cagliari,2.2,0.45,0.27
+Genoa,2.2,0.55,0.18
+Lecce,1.7,0.27,0.18
+Pisa,2.3,0.36,0.09
+Cremonese,2.4,0.60,0.18
+Barcelona,3.5,0.55,0.85
+Real Madrid,2.6,0.44,0.78
+Atletico Madrid,2.5,0.58,0.65
+Villarreal,2.8,0.50,0.62
+Athletic Bilbao,2.4,0.48,0.55
+Real Betis,2.3,0.60,0.50
+Real Sociedad,2.2,0.62,0.48
+Valencia,2.3,0.42,0.45
+Girona,2.7,0.58,0.38
+Sevilla,2.8,0.64,0.35
+Celta Vigo,2.3,0.68,0.32
+Osasuna,1.8,0.35,0.35
+Rayo Vallecano,2.2,0.45,0.41
+Getafe,1.6,0.32,0.28
+Espanyol,2.1,0.48,0.31
+Mallorca,2.2,0.45,0.28
+Alaves,2.0,0.45,0.25
+Levante,2.7,0.55,0.22
+Elche,1.9,0.45,0.18
+Real Oviedo,1.8,0.35,0.15
+Paris Saint-Germain,3.2,0.38,0.88
+Marseille,3.4,0.65,0.68
+Lyon,2.9,0.58,0.62
+Lens,2.7,0.45,0.65
+Monaco,3.5,0.72,0.58
+Lille,3.1,0.55,0.60
+Nice,2.5,0.45,0.48
+Rennes,2.8,0.62,0.45
+Brest,3.0,0.68,0.42
+Strasbourg,2.9,0.58,0.48
+Toulouse,2.7,0.62,0.38
+Nantes,2.3,0.42,0.35
+Lorient,3.1,0.68,0.38
+Auxerre,2.4,0.48,0.32
+Le Havre,2.1,0.42,0.28
+Metz,2.6,0.48,0.25
+Angers,2.3,0.45,0.22
+Paris FC,2.9,0.68,0.31
+Bayern Munich,4.2,0.55,0.88
+Bayer Leverkusen,3.3,0.60,0.78
+Borussia Dortmund,3.2,0.65,0.70
+Stuttgart,3.4,0.58,0.62
+RB Leipzig,3.1,0.52,0.65
+Eintracht Frankfurt,3.0,0.68,0.58
+Hoffenheim,3.5,0.75,0.45
+Wolfsburg,2.8,0.62,0.42
+Freiburg,2.5,0.55,0.48
+Werder Bremen,2.9,0.70,0.35
+Borussia Monchengladbach,3.2,0.64,0.32
+Union Berlin,2.4,0.45,0.40
+Mainz 05,2.3,0.42,0.38
+Augsburg,2.8,0.58,0.32
+FC Koln,2.6,0.62,0.28
+St Pauli,2.5,0.55,0.22
+Hamburg SV,2.7,0.60,0.25
+Heidenheim,2.4,0.48,0.28
