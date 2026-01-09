@@ -79,24 +79,33 @@ public class BetGui extends Application {
 
         // -=- LOGIC FOR BUTTONS -=-
         fetchBtn.setOnAction(e -> {
-            mainListView.getItems().setAll("INFO:Downloading data from API... Please wait.");
+            mainListView.getItems().setAll("INFO:Checking cache & downloading data...");
 
             new Thread(() -> {
                 try {
                     List<String> leagueKeys = List.of("soccer_epl", "soccer_spain_la_liga", "soccer_italy_serie_a", "soccer_germany_bundesliga", "soccer_france_ligue_one");
                     allMatches.clear();
+
                     for (String key : leagueKeys) {
-                        allMatches.addAll(parser.parseMatches(client.getRawData(key)));
+                        String data = loadResponseFromCache(key); // Look in file first
+
+                        if (data == null) {
+                            // Cache empty or old -> use API token
+                            data = client.getRawData(key);
+                            saveResponseToCache(key, data); // Save for next time
+                        }
+
+                        allMatches.addAll(parser.parseMatches(data));
                     }
 
                     Platform.runLater(() -> {
                         mainListView.getItems().clear();
-                        mainListView.getItems().add("INFO:Success! Loaded " + allMatches.size() + " matches.");
+                        mainListView.getItems().add("INFO:Success! Loaded " + allMatches.size() + " matches from Cache/API.");
                     });
                 } catch (Exception ex) {
                     Platform.runLater(() -> {
                         mainListView.getItems().clear();
-                        mainListView.getItems().add("WARN:Error while fetching data: " + ex.getMessage());
+                        mainListView.getItems().add("WARN:Error: " + ex.getMessage());
                     });
                 }
             }).start();
@@ -319,6 +328,33 @@ public class BetGui extends Application {
                 }
             }
         });
+    }
+
+    // -=- CACHE SYSTEM (SAVES TO LOCAL DISK) -=-
+    // Saves the raw JSON response from API to a local file
+    private void saveResponseToCache(String leagueKey, String data) {
+        try {
+            java.nio.file.Files.writeString(java.nio.file.Paths.get("cache_" + leagueKey + ".json"), data);
+        } catch (java.io.IOException e) {
+            System.err.println("Failed to save cache for: " + leagueKey);
+        }
+    }
+
+    // Loads the raw JSON response from a local file if it exists
+    private String loadResponseFromCache(String leagueKey) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get("cache_" + leagueKey + ".json");
+            if (java.nio.file.Files.exists(path)) {
+                // Check if the file is older than 12 hours
+                long lastModified = java.nio.file.Files.getLastModifiedTime(path).toMillis();
+                if (System.currentTimeMillis() - lastModified < 12 * 60 * 60 * 1000) {
+                    return java.nio.file.Files.readString(path);
+                }
+            }
+        } catch (java.io.IOException e) {
+            return null;
+        }
+        return null;
     }
 
     public static void main(String[] args) { launch(args); }
