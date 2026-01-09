@@ -165,23 +165,46 @@ public class BetGui extends Application {
         });
 
         // -=- LAYOUT -=-
+        // sidebar
         VBox sidebar = new VBox(15);
         sidebar.getStyleClass().add("sidebar");
         sidebar.setPadding(new Insets(25));
         sidebar.setPrefWidth(280);
-        sidebar.getChildren().addAll(settingsLabel, new Label("Total Odds:"), oddInput, new Label("Risk Level:"), riskCombo, new Separator(), fetchBtn, analysisBtn, couponBtn);
+        sidebar.getChildren().addAll(
+                settingsLabel,
+                new Label("Total Odds:"), oddInput,
+                new Label("Risk Level:"), riskCombo,
+                new Separator(),
+                fetchBtn, analysisBtn, couponBtn
+        );
 
-        VBox centerArea = new VBox(15);
-        centerArea.getChildren().addAll(mainListView, totalOddLabel);
+        // main view on the dashboard
+        VBox listViewContainer = new VBox(15);
+        listViewContainer.getChildren().addAll(mainListView, totalOddLabel);
         VBox.setVgrow(mainListView, Priority.ALWAYS);
 
+        // StackPane for changing view of the window
+        StackPane contentStack = new StackPane();
+        contentStack.getChildren().add(listViewContainer);
+
+        // listener -> waits for clicking at the exact match
+        mainListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null && (newVal.startsWith("BET_CARD:") || newVal.startsWith("ANALYSIS_CARD:"))) {
+                // changing window
+                showMatchDetails(contentStack, listViewContainer, newVal);
+            }
+        });
+
+        // new window structure
         BorderPane mainLayout = new BorderPane();
         HBox topBar = new HBox(titleLabel);
         topBar.setPadding(new Insets(20, 20, 10, 20));
+
         mainLayout.setTop(topBar);
         mainLayout.setLeft(sidebar);
-        mainLayout.setCenter(centerArea);
-        BorderPane.setMargin(centerArea, new Insets(0, 20, 20, 10));
+        mainLayout.setCenter(contentStack);
+
+        BorderPane.setMargin(contentStack, new Insets(0, 20, 20, 10));
 
         Scene scene = new Scene(mainLayout, 1000, 700);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
@@ -218,7 +241,7 @@ public class BetGui extends Application {
                     // -=- COUPON -=-
                 } else if (item.startsWith("BET_CARD:")) {
                     String content = item.replace("BET_CARD:", "");
-                    String[] parts = content.split("\\|"); // Separates info from odd price
+                    String[] parts = content.split("\\|");
 
                     HBox card = new HBox(15);
                     card.getStyleClass().add("coupon-card");
@@ -228,31 +251,28 @@ public class BetGui extends Application {
                     icon.getStyleClass().add("card-icon");
 
                     String fullInfo = parts[0];
-                    int splitIndex = fullInfo.indexOf("("); // Finds where date/btts starts
+                    int splitIndex = fullInfo.indexOf("(");
 
                     String matchName = (splitIndex != -1) ? fullInfo.substring(0, splitIndex).trim() : fullInfo;
                     String subDetails = (splitIndex != -1) ? fullInfo.substring(splitIndex).trim() : "";
 
                     subDetails = subDetails.replace("(", "")
-                            .replace(")", "   -   ")
+                            .replace(")", "   |   ")
                             .replace("[", "")
-                            .replace("]", "   -   ")
+                            .replace("]", "   |   ")
                             .replace("{", "")
                             .replace("}", "");
 
                     VBox textContainer = new VBox(2);
                     textContainer.setAlignment(Pos.CENTER_LEFT);
 
-                    // Line 1: Bold Match Name
                     Label nameLabel = new Label(matchName);
                     nameLabel.getStyleClass().add("card-name");
 
-                    // Line 2: Small Grey Stats (Date, Bet Type, BTTS)
                     Label statsLabel = new Label(subDetails);
-                    statsLabel.getStyleClass().add("card-stats"); // Using the same class as in analysis
+                    statsLabel.getStyleClass().add("card-stats");
 
                     textContainer.getChildren().addAll(nameLabel, statsLabel);
-                    // ----------------------------------------------------
 
                     Region spacer = new Region();
                     HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -285,7 +305,7 @@ public class BetGui extends Application {
                     matchLabel.getStyleClass().add("card-name-small");
 
                     // Stats (BTTS & Goals)
-                    String statsStr = (parts.length >= 3) ? parts[1].trim() + "    -    " + parts[2].trim()+ "   " : "";
+                    String statsStr = (parts.length >= 3) ? parts[1].trim() + "   |   " + parts[2].trim()+ "   " : "";
                     Label statsLabel = new Label(statsStr);
                     statsLabel.getStyleClass().add("card-stats");
 
@@ -355,6 +375,140 @@ public class BetGui extends Application {
             return null;
         }
         return null;
+    }
+
+    // -=- DETAILED MATCH VIEW -=-
+    private void showMatchDetails(StackPane stack, VBox originalView, String itemData) {
+        String home = "";
+        String away = "";
+        String datePart = "N/A";
+
+        // smart parsing for both Coupon and Analysis formats
+        if (itemData.startsWith("ANALYSIS_CARD:")) {
+            String raw = itemData.replace("ANALYSIS_CARD:", "");
+
+            // Extract date and match title
+            datePart = raw.contains("[") ? raw.substring(raw.indexOf("[") + 1, raw.indexOf("]")) : "N/A";
+            String matchPart = raw.split("\\|")[0].replace("[" + datePart + "]", "").trim();
+
+            String[] teams = matchPart.split(" vs ");
+            home = teams[0].trim();
+            away = (teams.length > 1) ? teams[1].trim() : "";
+
+        } else if (itemData.startsWith("BET_CARD:")) {
+            String raw = itemData.replace("BET_CARD:", "");
+
+            // matchPart is everything before the first '('
+            String matchPart = raw.split("\\(")[0].trim();
+            String[] teams = matchPart.split(" vs ");
+            home = teams[0].trim();
+            away = (teams.length > 1) ? teams[1].trim() : "";
+
+            if (raw.contains("(") && raw.contains(")")) {
+                datePart = raw.substring(raw.indexOf("(") + 1, raw.indexOf(")")).trim();
+            }
+        }
+
+        VBox detailLayout = new VBox(20);
+        detailLayout.getStyleClass().add("detail-container");
+
+        // navigation button
+        Button backBtn = new Button("← BACK TO DASHBOARD");
+        backBtn.getStyleClass().add("back-button");
+        backBtn.setOnAction(e -> { stack.getChildren().setAll(originalView); });
+
+        // gradient header section
+        VBox headerBox = new VBox(5);
+        headerBox.getStyleClass().add("detail-header-box");
+        Label dLabel = new Label("MATCH DATE   -   " + datePart);
+        dLabel.getStyleClass().add("detail-date-label");
+        Label tLabel = new Label((home + " vs " + away).toUpperCase());
+        tLabel.getStyleClass().addAll("header-main-text", "detail-title-text");
+        headerBox.getChildren().addAll(dLabel, tLabel);
+
+        StatsService stats = new StatsService();
+
+        // center box with AI probability
+        VBox predictionBox = new VBox(5);
+        predictionBox.getStyleClass().add("prediction-card");
+        double prob = stats.predictBTTSProb(home, away) * 100;
+        Label probTitle = new Label("AI BTTS PROBABILITY");
+        probTitle.setStyle("-fx-text-fill: #8b949e; -fx-font-size: 10px; -fx-font-weight: 800;");
+        Label probValue = new Label(String.format("%.1f%%", prob));
+        probValue.setStyle("-fx-text-fill: #58a6ff; -fx-font-size: 32px; -fx-font-weight: 900;");
+        predictionBox.getChildren().addAll(probTitle, probValue);
+
+        // table for visual stats comparison
+        GridPane grid = new GridPane();
+        grid.getStyleClass().add("stats-grid");
+        grid.setAlignment(Pos.CENTER);
+
+        // adding visual rows with progress bars
+        addVisualRow(grid, "WIN RATE", stats.getWinRateString(home), stats.getWinRateString(away), 0);
+        addVisualRow(grid, "AVG GOALS", stats.getTeamGF(home), stats.getTeamGF(away), 1);
+        addVisualRow(grid, "BTTS HISTORY", stats.getBTTS(home), stats.getBTTS(away), 2);
+
+        detailLayout.getChildren().addAll(backBtn, headerBox, predictionBox, grid);
+        stack.getChildren().setAll(detailLayout);
+    }
+
+    // helper method for progress line
+    private VBox createStatWithBar(String value, boolean leftAlign) {
+        VBox box = new VBox(5);
+        box.setAlignment(leftAlign ? Pos.CENTER_LEFT : Pos.CENTER_RIGHT);
+
+        Label valLab = new Label(value);
+        valLab.getStyleClass().add("stats-row-value");
+
+        // background
+        StackPane barBg = new StackPane();
+        barBg.getStyleClass().add("stat-bar-bg");
+        barBg.setMinWidth(100);
+        barBg.setMaxWidth(100); // Swidth
+
+        //filling of the line
+        Region fill = new Region();
+        fill.getStyleClass().add("stat-bar-fill");
+
+        // parsing data
+        double val = 0;
+        try {
+            val = Double.parseDouble(value.replace("%", "").replace(",", "."));
+        } catch (Exception e) {
+            val = 0;
+        }
+
+        // scalining values
+        double calculatedWidth = (val <= 10) ? val * 20 : val;
+        double finalWidth = Math.min(calculatedWidth, 100);
+
+        // setting min and max width
+        fill.setMinWidth(finalWidth);
+        fill.setMaxWidth(finalWidth);
+        fill.setPrefWidth(finalWidth);
+
+        barBg.getChildren().add(fill);
+
+        // alignment setting
+        StackPane.setAlignment(fill, leftAlign ? Pos.CENTER_LEFT : Pos.CENTER_RIGHT);
+
+        box.getChildren().addAll(valLab, barBg);
+        return box;
+    }
+
+    // helper method to use CSS classes
+    private void addVisualRow(GridPane g, String label, String hVal, String aVal, int row) {
+        VBox homeSide = createStatWithBar(hVal, true);
+        VBox awaySide = createStatWithBar(aVal, false);
+
+        Label midLabel = new Label(label);
+        midLabel.getStyleClass().add("stats-row-label");
+        midLabel.setAlignment(Pos.CENTER);
+        midLabel.setMinWidth(120);
+
+        g.add(homeSide, 0, row);
+        g.add(midLabel, 1, row);
+        g.add(awaySide, 2, row);
     }
 
     public static void main(String[] args) { launch(args); }

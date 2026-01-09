@@ -12,6 +12,8 @@ public class StatsService {
     public record TeamStats(double avgTotalGoals, double bttsRate, double winRate) {}
 
     private final Map<String, TeamStats> statsMap = new HashMap<>();
+    // added to store raw data for findStat method
+    private final Map<String, String[]> rawDataMap = new HashMap<>();
     private static final String FILE_NAME = "stats.csv";
 
     public StatsService() {
@@ -49,6 +51,7 @@ public class StatsService {
                         if (v.length >= 4) {
                             // team name is the key
                             String cleanKey = cleanName(v[0]);
+                            rawDataMap.put(cleanKey, v);
                             statsMap.put(cleanKey, new TeamStats(
                                     Double.parseDouble(v[1]), // avgGoals
                                     Double.parseDouble(v[2]), // btts
@@ -63,6 +66,16 @@ public class StatsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // helper to find raw stat by index
+    private String findStat(String teamName, int index) {
+        String key = cleanName(teamName);
+        String[] data = rawDataMap.get(key);
+        if (data != null && index < data.length) {
+            return data[index];
+        }
+        return "0";
     }
 
     public TeamStats getStatsForTeam(String teamName) {
@@ -99,6 +112,32 @@ public class StatsService {
         return 0.7 * poisson + 0.3 * historical;
     }
 
+    public String getTeamGF(String teamName) {
+        // using avg goals column as proxy for GF
+        return findStat(teamName, 1);
+    }
+
+    // returning win rate as a formatted string
+    public String getWinRateString(String teamName) {
+        try {
+            double wr = Double.parseDouble(findStat(teamName, 3));
+            return String.format("%.0f%%", wr * 100);
+        } catch (Exception e) {
+            return "0%";
+        }
+    }
+
+    public String getBTTS(String teamName) {
+        // converting btts rate to percentage string
+        try {
+            double rate = Double.parseDouble(findStat(teamName, 2));
+            return String.format("%.0f%%", rate * 100);
+        } catch (Exception e) {
+            return "0%";
+        }
+    }
+
+    // returning win rate as double for logic
     public double getWinRate(String teamName) {
         return getStatsForTeam(teamName).winRate();
     }

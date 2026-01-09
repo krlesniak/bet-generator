@@ -130,12 +130,20 @@
 
 /* --- THE COUPON STYLE (FOR EACH MATCH) --- */
 .coupon-card {
-    -fx-background-color: #161b22; /* Slate navy card color */
-    -fx-background-radius: 12;      /* Smooth rounded corners */
-    -fx-border-color: #30363d;     /* Subtle border to define the card */
-    -fx-border-radius: 12;
-    -fx-padding: 15 25;            /* Generous internal spacing */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2); /* Subtle depth */
+    /* Gradient */
+    -fx-background-color: linear-gradient(to bottom right, #1c2128, #161b22);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    /* Brighter border on the top-left for 3D effect */
+    -fx-border-color: linear-gradient(to bottom right, #30363d, transparent);
+    -fx-border-width: 1.5;
+    -fx-padding: 15 25;
+}
+
+.analysis-card:hover, .coupon-card:hover {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 15, 0, 0, 0);     /* blue glow */
+    -fx-cursor: hand;
 }
 
 .card-name {
@@ -181,7 +189,7 @@
     -fx-text-fill: #c9d1d9;        /* Electric blue accent */
     -fx-font-size: 25px;           /* #c9d1d9 -> light grey */
     -fx-font-weight: 900;          /* #c9d1d9 -> eletric blue */
-    -fx-letter-spacing: 4px;
+    -fx-letter-spacing: 5px;
     /* Subtle glow effect on the blue text */
     -fx-effect: dropshadow(gaussian, #c9d1d9, 5, 0, 0, 0);
 }
@@ -197,15 +205,17 @@
 
 /* --- SUMMARY LABEL --- */
 .summary-label {
-    -fx-font-size: 22px;            /* Large font size for visibility */
-    -fx-font-weight: 800;           /* Extra bold weight */
-    -fx-text-fill:  #58a6ff;         /* Electric blue color for the total */
-    -fx-padding: 15 30;             /* Internal spacing around the text */
-    -fx-background-color: #161b22;  /* Match header color */
-    -fx-background-radius: 12;      /* Rounded corners */
-    -fx-border-color: #58a6ff;      /* Blue border accent */
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #58a6ff; /*  grey -> #c9d1d9*/
+    -fx-padding: 15 30;
+    -fx-background-color: linear-gradient(to right, #0d1117, #1c2128);
+    -fx-background-radius: 12;
+    -fx-border-color: #484f58;
+    -fx-border-width: 1.2;
     -fx-border-radius: 12;
-    -fx-alignment: CENTER_RIGHT;    /* Align total odd to the right */
+    -fx-alignment: CENTER_RIGHT;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 15, 0, 0, 0);
 }
 
 /* --- SCROLLBARS --- */
@@ -229,14 +239,15 @@
 
 /* --- ANALYSIS CARDS --- */
 .analysis-card {
-    -fx-background-color: #161b22;
-    -fx-background-radius: 10;
-    -fx-border-color: #30363d;
-    -fx-border-radius: 10;
-    -fx-padding: 15 25;             /* Reduced padding for a smaller look */
-    -fx-effect: none;               /* Removed shadow to make it feel lighter */
+    /* Gradient */
+    -fx-background-color: linear-gradient(to bottom right, #1c2128, #161b22);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    /* Brighter border on the top-left for 3D effect */
+    -fx-border-color: linear-gradient(to bottom right, #30363d, transparent);
+    -fx-border-width: 1.5;
+    -fx-padding: 15 25;
 }
-
 .card-name-small {
     -fx-text-fill: #f0f6fc;
     -fx-font-weight: 700;
@@ -264,24 +275,36 @@
 }
 
 .badge-high{
-    -fx-background-color: #238636; /* Success Green */
-    -fx-border-color: #2ea043;
+    -fx-background-color: linear-gradient(to bottom, #238636, #1a6328);
+    -fx-effect: dropshadow(gaussian, rgba(35, 134, 54, 0.3), 8, 0, 0, 0);
+
     -fx-background-radius: 20;
     -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
 }
 
 .badge-medium {
-    -fx-background-color: #9e6a03; /* Warning Orange/Yellow */
-    -fx-border-color: #d29922;
+    -fx-background-color: linear-gradient(to bottom, #9e6a03, #7a5202);
+    -fx-effect: dropshadow(gaussian, rgba(158, 106, 3, 0.3), 8, 0, 0, 0);
+
     -fx-background-radius: 20;
     -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
 }
 
 .badge-low{
-    -fx-background-color: #da3633; /* Danger Red */
-    -fx-border-color: #f85149;
+    -fx-background-color: linear-gradient(to bottom, #cf222e, #a40e26);
+    -fx-effect: dropshadow(gaussian, rgba(207, 34, 46, 0.3), 8, 0, 0, 0);
+
     -fx-background-radius: 20;
     -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
 }
 
 /* --- DATA DOWNLOAD NOTIFICATIONS --- */
@@ -309,4 +332,95 @@
     -fx-text-fill: #f0f6fc;
     -fx-font-size: 16px;
     -fx-font-weight: 800;
+}
+
+/* ----- NEW WINDOW WITH STATS -----*/
+
+/* Container for the match detail view */
+.detail-container {
+    -fx-background-color: #0d1117;
+    -fx-padding: 30;
+}
+
+/* Gray back button with hover effect */
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #8b949e;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+    -fx-padding: 0 0 10 0;
+}
+
+.back-button:hover {
+    -fx-text-fill: white;
+}
+
+/* Header with the blue gradient underline */
+.detail-header-box {
+    -fx-padding: 0 0 15 0;
+    -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
+    -fx-border-width: 0 0 2 0;
+}
+
+.detail-date-label {
+    -fx-text-fill: #8b949e;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 2px;
+    -fx-alignment: CENTER;
+}
+
+
+.detail-title-text {
+    -fx-font-size: 24px;
+    -fx-text-fill: #c9d1d9;
+    -fx-alignment: CENTER;
+    -fx-font-weight: 800;
+}
+
+/* Grid layout for stats */
+.stats-grid {
+    -fx-hgap: 50;
+    -fx-vgap: 25;
+    -fx-padding: 30 0 0 0;
+}
+
+.stats-row-label {
+    -fx-text-fill: #8b949e;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+.stats-row-value {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+/* -- DETAILS ---*/
+
+/* Progress bar container */
+.stat-bar-bg {
+    -fx-background-color: #30363d;
+    -fx-min-height: 4;
+    -fx-max-height: 4;
+    -fx-background-radius: 2;
+}
+
+/* The actual fill of the bar */
+.stat-bar-fill {
+    -fx-background-color: #58a6ff;
+    -fx-background-radius: 2;
+    -fx-min-height: 4;
+    -fx-max-height: 4;
+}
+
+/* Prediction card in the middle */
+.prediction-card {
+    -fx-background-color: rgba(88, 166, 255, 0.05);
+    -fx-border-color: #8b949e;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-alignment: CENTER;
 }
