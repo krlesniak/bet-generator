@@ -178,7 +178,7 @@ public class BetGui extends Application {
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Betting AI Dashboard");
+        primaryStage.setTitle("Betting Dashboard");
         primaryStage.show();
     }
 
@@ -197,7 +197,7 @@ public class BetGui extends Application {
                 } else if (item.startsWith("HEADER:")) {
                     String title = item.replace("HEADER:", "");
                     Label headerLabel = new Label(title);
-                    headerLabel.getStyleClass().add("coupon-header-text");
+                    headerLabel.getStyleClass().add("header-text");
 
                     HBox headerBox = new HBox(headerLabel);
                     headerBox.getStyleClass().add("coupon-header-box");

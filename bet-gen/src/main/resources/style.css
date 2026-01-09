@@ -65,8 +65,8 @@
 }
 
 .btn-primary {
-    -fx-background-color: #30363d; /* Apply a blue gradient background */
-    -fx-text-fill: white;          /* Set the text color to pure white */
+    -fx-background-color: #21262d; /* Apply a blue gradient background */
+    -fx-text-fill: #c9d1d9;          /* Set the text color to pure white */
      -fx-border-color: #30363d;     /* Set the border color for secondary buttons */
      -fx-border-radius: 8;          /* Match the border radius to the background radius */
 }
@@ -177,19 +177,22 @@
 }
 
 /* --- SMART COUPON HEADER --- */
-.coupon-header-box {
-    -fx-padding: 20 0 10 0;        /* Spacing above and below the header */
-    -fx-background-color: transparent;
+.header-text {
+    -fx-text-fill: #c9d1d9;        /* Electric blue accent */
+    -fx-font-size: 25px;           /* #c9d1d9 -> light grey */
+    -fx-font-weight: 900;          /* #c9d1d9 -> eletric blue */
+    -fx-letter-spacing: 4px;
+    /* Subtle glow effect on the blue text */
+    -fx-effect: dropshadow(gaussian, #c9d1d9, 5, 0, 0, 0);
 }
 
-.coupon-header-text {
-    -fx-text-fill: #f0f6fc;        /* Off-white text color */
-    -fx-font-size: 22px;           /* Increased font size for visibility */
-    -fx-font-weight: 900;          /* Extra heavy font weight */
-    -fx-letter-spacing: 2px;       /* Letter spacing for a "Premium" look */
-    -fx-border-color: #8b949e;     /* Grey accent line underneath */
-    -fx-border-width: 0 0 3 0;     /* Bottom border only to act as an underline */
-    -fx-padding: 0 15 5 15;        /* Spacing from the underline effect */
+.coupon-header-box {
+    -fx-padding: 5 0 15 0;
+    -fx-alignment: CENTER;
+    /* line with gradient: from transparent to blue */
+    -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
+    -fx-border-width: 0 0 2 0;
+    -fx-margin: -10 0 0 0
 }
 
 /* --- SUMMARY LABEL --- */
@@ -255,23 +258,30 @@
     -fx-font-weight: 800;
     -fx-font-size: 14px;
     -fx-padding: 6 12;
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
     -fx-text-fill: white;
 }
 
 .badge-high{
     -fx-background-color: #238636; /* Success Green */
     -fx-border-color: #2ea043;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 }
 
 .badge-medium {
     -fx-background-color: #9e6a03; /* Warning Orange/Yellow */
     -fx-border-color: #d29922;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 }
 
 .badge-low{
     -fx-background-color: #da3633; /* Danger Red */
     -fx-border-color: #f85149;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 }
 
 /* --- DATA DOWNLOAD NOTIFICATIONS --- */
