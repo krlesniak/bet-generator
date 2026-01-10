@@ -1,0 +1,206 @@
+/* --- BUTTON STYLES --- */
+.button {
+    -fx-padding: 12 20;            /* Set internal padding for the button content */
+    -fx-background-radius: 8;      /* Apply rounded corners to the button background */
+    -fx-font-weight: 700;          /* Set a bold weight for the button text */
+    -fx-cursor: hand;              /* Change the mouse cursor to a hand on hover */
+    -fx-font-size: 13px;           /* Set the font size for button text */
+    -fx-background-insets: 0;
+}
+
+.btn-secondary {
+    -fx-background-color: #21262d; /* Set the dark grey background for secondary buttons */
+    -fx-text-fill: #c9d1d9;        /* Set a light grey color for secondary button text */
+    -fx-border-color: #30363d;     /* Set the border color for secondary buttons */
+    -fx-border-radius: 8;          /* Match the border radius to the background radius */
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #8b949e; /* Change background color when the mouse hovers over */
+    -fx-text-fill: #f0f6fc;        /* Brighten text color during mouse hover */
+    -fx-scale-x: 1.04;             /* Slightly increase the horizontal scale on hover */
+    -fx-scale-y: 1.04;             /* Slightly increase the vertical scale on hover */
+}
+
+.btn-primary {
+    -fx-background-color: #21262d; /* Apply a blue gradient background */
+    -fx-text-fill: #c9d1d9;          /* Set the text color to pure white */
+     -fx-border-color: #30363d;     /* Set the border color for secondary buttons */
+     -fx-border-radius: 8;          /* Match the border radius to the background radius */
+}
+
+.btn-primary:hover {
+    -fx-background-color: #8b949e; /* Brighten gradient on hover */
+    -fx-text-fill: #f0f6fc;        /* Brighten text color during mouse hover */
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+}
+
+/* --- THE COUPON STYLE (FOR EACH MATCH) --- */
+.coupon-card {
+    /* Gradient */
+    -fx-background-color: linear-gradient(to bottom right, #1c2128, #161b22);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    /* Brighter border on the top-left for 3D effect */
+    -fx-border-color: linear-gradient(to bottom right, #30363d, transparent);
+    -fx-border-width: 1.5;
+    -fx-padding: 15 25;
+}
+
+.analysis-card:hover, .coupon-card:hover {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 15, 0, 0, 0);     /* blue glow */
+    -fx-cursor: hand;
+}
+
+.card-name {
+    -fx-text-fill: #f0f6fc;        /* Off-white color for team names */
+    -fx-font-weight: 800;          /* Bold weight for better readability */
+    -fx-font-size: 14px;
+}
+
+.card-stats {
+    -fx-text-fill: #8b949e;        /* Muted grey color (same as analysis) */
+    -fx-font-size: 14px;           /* Smaller font size */
+    -fx-font-weight: 400;
+}
+
+.card-icon {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-opacity: 1.0;
+}
+
+.card-odd {
+    -fx-text-fill: #58a6ff;        /* Electric blue for the price value */
+    -fx-font-weight: 800;          /* Extra bold for the odd */
+    -fx-font-size: 15px;
+    -fx-background-color: #0d1117; /* Darker inset for the odd value */
+    -fx-padding: 6 14;             /* Padding around the odd value badge */
+    -fx-background-radius: 6;
+}
+
+/* --- SMART COUPON HEADER --- */
+.header-text {
+    -fx-text-fill: #c9d1d9;        /* Electric blue accent */
+    -fx-font-size: 25px;           /* #c9d1d9 -> light grey */
+    -fx-font-weight: 900;          /* #c9d1d9 -> eletric blue */
+    -fx-letter-spacing: 5px;
+    /* Subtle glow effect on the blue text */
+    -fx-effect: dropshadow(gaussian, #c9d1d9, 5, 0, 0, 0);
+}
+
+.coupon-header-box {
+    -fx-padding: 5 0 15 0;
+    -fx-alignment: CENTER;
+    /* line with gradient: from transparent to blue */
+    -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
+    -fx-border-width: 0 0 2 0;
+    -fx-margin: -10 0 0 0
+}
+
+/* --- SUMMARY LABEL --- */
+.summary-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #58a6ff; /* grey -> #c9d1d9*/
+    -fx-padding: 15 30;
+    -fx-background-color: linear-gradient(to right, #0d1117, #1c2128);
+    -fx-background-radius: 12;
+    -fx-border-color: #484f58;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 12;
+    -fx-alignment: CENTER_RIGHT;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 15, 0, 0, 0);
+}
+
+.summary-label:hover {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 15, 0, 0, 0);     /* blue glow */
+    -fx-cursor: hand;
+}
+
+/* --- ANALYSIS CARDS --- */
+.analysis-card {
+    /* Gradient */
+    -fx-background-color: linear-gradient(to bottom right, #1c2128, #161b22);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    /* Brighter border on the top-left for 3D effect */
+    -fx-border-color: linear-gradient(to bottom right, #30363d, transparent);
+    -fx-border-width: 1.5;
+    -fx-padding: 15 25;
+}
+.card-name-small {
+    -fx-text-fill: #f0f6fc;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;           /* Smaller match font */
+}
+
+/* --- RISK BADGES --- */
+.risk-badge {
+    -fx-font-weight: 800;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-text-fill: white;
+}
+
+.badge-high{
+    -fx-background-color: linear-gradient(to bottom, #238636, #1a6328);
+    -fx-effect: dropshadow(gaussian, rgba(35, 134, 54, 0.3), 8, 0, 0, 0);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
+}
+
+.badge-medium {
+    -fx-background-color: linear-gradient(to bottom, #9e6a03, #7a5202);
+    -fx-effect: dropshadow(gaussian, rgba(158, 106, 3, 0.3), 8, 0, 0, 0);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
+}
+
+.badge-low{
+    -fx-background-color: linear-gradient(to bottom, #cf222e, #a40e26);
+    -fx-effect: dropshadow(gaussian, rgba(207, 34, 46, 0.3), 8, 0, 0, 0);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 6 15;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
+}
+
+/* --- DATA DOWNLOAD NOTIFICATIONS --- */
+.download-info {
+    -fx-background-color: rgba(56, 140, 243, 0.1); /* Subtle blue glow */
+    -fx-border-color: #388cf3;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-margin: 10 0;
+}
+
+.download-warn {
+    -fx-background-color: rgba(218, 54, 51, 0.1); /* Subtle red glow */
+    -fx-border-color: #da3633;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-margin: 10 0;
+}
+
+.download-message-text {
+    -fx-text-fill: #f0f6fc;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}

@@ -1,0 +1,59 @@
+/* --- SIDEBAR SECTION --- */
+.sidebar {
+    -fx-background-color: #0d1117; /* Set the background color for the sidebar panel */
+    -fx-border-color: #30363d;     /* Set the color of the sidebar border */
+    -fx-border-width: 0 1 0 0;     /* Apply a 1px border only to the right side */
+    -fx-padding: 30;               /* Set uniform internal padding of 30px */
+}
+
+.sidebar .label {
+    -fx-text-fill: #8b949e;        /* Set a muted grey color for standard labels */
+    -fx-font-size: 13px;           /* Set the font size for sidebar labels */
+    -fx-font-weight: 600;          /* Set a semi-bold weight for sidebar labels */
+}
+
+.sidebar-header {
+    -fx-font-size: 11px;           /* Set a small font size for section headers */
+    -fx-font-weight: 800;          /* Set an extra bold weight for section headers */
+    -fx-text-fill: #58a6ff;        /* Apply an electric blue color for the header accent */
+    -fx-padding: 0 0 12 0;         /* Add 12px of spacing below the header */
+}
+
+/* --- INPUT FIELDS & COMBO BOX --- */
+.text-field, .combo-box {
+    -fx-background-color: #0d1117; /* Set the dark background for input fields */
+    -fx-background-radius: 8;      /* Apply rounded corners to input backgrounds */
+    -fx-border-color: #30363d;     /* Set the border color for input fields */
+    -fx-border-radius: 8;          /* Match the border radius to the background radius */
+    -fx-padding: 10;               /* Set internal text padding inside the fields */
+    -fx-text-fill: #f0f6fc;        /* Set the color of the text typed by the user */
+    -fx-prompt-text-fill: #484f58; /* Set the color for the placeholder/prompt text */
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+}
+
+/* --- COMBO BOX DROPDOWN --- */
+.combo-box-popup .list-view {
+    -fx-background-color: #161b22;
+    -fx-border-color: #30363d;
+    -fx-border-radius: 8;
+    -fx-padding: 5;
+    -fx-background-radius: 8;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #161b22;
+    -fx-text-fill: #f0f6fc;
+    -fx-padding: 8 12;
+    -fx-background-radius: 8;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #8b949e;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}

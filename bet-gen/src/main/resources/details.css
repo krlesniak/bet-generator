@@ -1,0 +1,106 @@
+/* ----- NEW WINDOW WITH STATS -----*/
+
+/* Container for the match detail view */
+.detail-container {
+    -fx-background-color: #0d1117;
+    -fx-padding: 30;
+}
+
+/* Gray back button with hover effect */
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #8b949e;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+    -fx-padding: 0 0 10 0;
+}
+
+.back-button:hover {
+    -fx-text-fill: white;
+}
+
+/* Header with the blue gradient underline */
+.detail-header-box {
+    -fx-padding: 0 0 15 0;
+    -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
+    -fx-border-width: 0 0 2 0;
+}
+
+.detail-date-label {
+    -fx-text-fill: #8b949e;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 2px;
+    -fx-alignment: CENTER;
+}
+
+.detail-title-text {
+    -fx-font-size: 24px;
+    -fx-text-fill: #c9d1d9;
+    -fx-alignment: CENTER;
+    -fx-font-weight: 800;
+}
+
+/* Grid layout for stats */
+.stats-grid {
+    -fx-hgap: 50;
+    -fx-vgap: 25;
+    -fx-padding: 30 0 0 0;
+}
+
+.stats-row-label {
+    -fx-text-fill: #8b949e;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+.stats-row-value {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+/* -- DETAILS ---*/
+
+/* Progress bar container */
+.stat-bar-bg {
+    -fx-background-color: #30363d;
+    -fx-min-height: 4;
+    -fx-max-height: 4;
+    -fx-background-radius: 2;
+}
+
+/* The actual fill of the bar */
+.stat-bar-fill {
+    -fx-background-color: #58a6ff;
+    -fx-background-radius: 2;
+    -fx-min-height: 4;
+    -fx-max-height: 4;
+}
+
+/* Prediction card in the middle */
+.prediction-card {
+    -fx-background-color: rgba(88, 166, 255, 0.05);
+    -fx-border-color: #8b949e;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-alignment: CENTER;
+}
+
+.prediction-title-label {
+    -fx-text-fill: #c9d1d9;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+/* --- FORM COLORS --- */
+.form-circle {
+    -fx-background-radius: 50;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+.form-w { -fx-background-color: #238636; } /* Win - Green */
+.form-l { -fx-background-color: #cf222e; } /* Loss - Red */
+.form-d { -fx-background-color: #8b949e; } /* Draw - Gray */

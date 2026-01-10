@@ -1,0 +1,60 @@
+/* --- GLOBAL STYLES --- */
+.root {
+    -fx-background-color: #0b0e14; /* Set the main background color of the application */
+    -fx-font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; /* Define the font stack for the entire UI */
+}
+
+/* --- HEADER SECTION --- */
+.top-bar {
+    -fx-background-color: #161b22; /* Set the background color for the top header bar */
+    -fx-padding: 18 30;             /* Set vertical and horizontal internal padding */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 12, 0, 0, 2); /* Apply an outer shadow for depth */
+    -fx-border-color: #30363d;     /* Set the color of the header border */
+    -fx-border-width: 0 0 1 0;     /* Apply a 1px border only to the bottom of the header */
+}
+
+.main-title {
+    -fx-font-size: 25px;           /* Set the font size for the main application title */
+    -fx-font-weight: 800;          /* Set the font weight to extra bold */
+    -fx-text-fill: #f0f6fc;        /* Set the text color to an off-white shade */
+}
+
+/* --- LIST VIEW RESULTS  --- */
+.results-list {
+    -fx-background-color: transparent; /* Remove default ListView background */
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.results-list .virtual-flow {
+    -fx-background-color: #0b0e14; /* Match main navy background */
+}
+
+/* --- LIST CELL TWEAKS --- */
+.list-cell {
+    -fx-background-color: transparent; /* Ensure items don't have default backgrounds */
+    -fx-padding: 5 0;                   /* Vertical gap between cards */
+}
+
+.list-cell:selected {
+    -fx-background-color: transparent; /* Disable the standard blue selection bar */
+}
+
+/* --- SCROLLBARS --- */
+.results-list .scroll-bar:vertical, .results-list .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.results-list .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-padding: -10;              /* Effectively hides the bar space */
+}
+
+.results-list .scroll-bar .thumb {
+    -fx-background-color: #30363d;
+    -fx-background-radius: 10;
+}
+
+.separator .line {
+    -fx-border-color: #30363d;
+}
