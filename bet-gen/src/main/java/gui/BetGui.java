@@ -41,6 +41,12 @@ public class BetGui extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            // font from resources
+            javafx.scene.text.Font.loadFont(getClass().getResourceAsStream("/fonts/Inter_18pt-Medium.ttf"), 13);
+        } catch (Exception e) {
+            System.err.println("Nie udało się załadować czcionki: " + e.getMessage());
+        }
         // -=- HEADER -=-
         Label titleLabel = new Label("\uD83D\uDCA5 Bet Krzysztof Generator \uD83D\uDCA5");
         titleLabel.getStyleClass().add("main-title");
@@ -216,6 +222,7 @@ public class BetGui extends Application {
                     setText(null);
                     setStyle("-fx-background-color: transparent;");
 
+                    // -=- HEADER -=-
                 } else if (item.startsWith("HEADER:")) {
                     String title = item.replace("HEADER:", "");
                     Label headerLabel = new Label(title);
@@ -227,7 +234,7 @@ public class BetGui extends Application {
 
                     setGraphic(headerBox);
                     setText(null);
-
+                    // -=- COUPON -=-
                 } else if (item.startsWith("BET_CARD:")) {
                     String content = item.replace("BET_CARD:", "");
                     String[] parts = content.split("\\|");
@@ -248,9 +255,9 @@ public class BetGui extends Application {
                     subDetails = subDetails.replace("(", "")
                             .replace(")", "   |   ")
                             .replace("[", "")
-                            .replace("]", "   |   ")
-                            .replace("{", "")
-                            .replace("}", "");
+                            .replace("]", "   |   ");
+
+                    subDetails = subDetails.substring(0, subDetails.length() - 4);
 
                     VBox textContainer = new VBox(2);
                     textContainer.setAlignment(Pos.CENTER_LEFT);
@@ -273,6 +280,7 @@ public class BetGui extends Application {
                     setGraphic(card);
                     setText(null);
 
+                    // -=- BTTS ANALYSIS -=-
                 } else if (item.startsWith("ANALYSIS_CARD:")) {
                     String raw = item.replace("ANALYSIS_CARD:", "");
                     String[] parts = raw.split("\\|");
@@ -308,6 +316,7 @@ public class BetGui extends Application {
                     setGraphic(card);
                     setText(null);
 
+                    // -=- DOWNLOAD INFO -=-
                 } else if (item.startsWith("INFO:") || item.startsWith("WARN:")) {
                     boolean isInfo = item.startsWith("INFO:");
                     String message = item.replace(isInfo ? "INFO:" : "WARN:", "");
@@ -331,9 +340,20 @@ public class BetGui extends Application {
         });
     }
 
+    private String getCachePath(String leagueKey) {
+        String userHome = System.getProperty("user.home");
+        java.nio.file.Path folder = java.nio.file.Paths.get(userHome, ".betaidashboard");
+        try {
+            if (!java.nio.file.Files.exists(folder)) {
+                java.nio.file.Files.createDirectories(folder);
+            }
+        } catch (java.io.IOException e) { e.printStackTrace(); }
+        return folder.resolve("cache_" + leagueKey + ".json").toString();
+    }
+
     private void saveResponseToCache(String leagueKey, String data) {
         try {
-            java.nio.file.Files.writeString(java.nio.file.Paths.get("cache_" + leagueKey + ".json"), data);
+            java.nio.file.Files.writeString(java.nio.file.Paths.get(getCachePath(leagueKey)), data);
         } catch (java.io.IOException e) {
             System.err.println("Failed to save cache for: " + leagueKey);
         }
@@ -341,7 +361,7 @@ public class BetGui extends Application {
 
     private String loadResponseFromCache(String leagueKey) {
         try {
-            java.nio.file.Path path = java.nio.file.Paths.get("cache_" + leagueKey + ".json");
+            java.nio.file.Path path = java.nio.file.Paths.get(getCachePath(leagueKey));
             if (java.nio.file.Files.exists(path)) {
                 long lastModified = java.nio.file.Files.getLastModifiedTime(path).toMillis();
                 if (System.currentTimeMillis() - lastModified < 12 * 60 * 60 * 1000) {
@@ -379,10 +399,12 @@ public class BetGui extends Application {
         home = teams[0].trim();
         away = (teams.length > 1) ? teams[1].trim() : "";
 
-        VBox detailLayout = new VBox(20);
+        // Main container for details
+        VBox detailLayout = new VBox(25);
         detailLayout.getStyleClass().add("detail-container");
+        detailLayout.setPadding(new Insets(20));
 
-        // UI Components
+        // Navigation Components
         Button backBtn = new Button("← BACK TO DASHBOARD");
         backBtn.getStyleClass().add("back-button");
         backBtn.setOnAction(e -> { stack.getChildren().setAll(originalView); });
@@ -395,19 +417,49 @@ public class BetGui extends Application {
         tLabel.getStyleClass().addAll("header-main-text", "detail-title-text");
         headerBox.getChildren().addAll(dLabel, tLabel);
 
+        // --- PREDICTION CARD ---
         VBox predictionBox = new VBox(5);
         predictionBox.getStyleClass().add("prediction-card");
 
         StatsService stats = new StatsService();
-        double prob = stats.predictBTTSProb(home, away) * 100;
+        double probDecimal = stats.predictBTTSProb(home, away); // Returns value like 0.60
 
-        Label probValue = new Label(String.format("%.1f%%", prob));
+        Label probValue = new Label(String.format("%.1f%%", probDecimal * 100));
         Label probTitle = new Label("AI BTTS PROBABILITY");
-
         probTitle.getStyleClass().add("prediction-title-label");
         probValue.setStyle("-fx-text-fill: #58a6ff; -fx-font-size: 32px; -fx-font-weight: 900;");
-
         predictionBox.getChildren().addAll(probTitle, probValue);
+
+        // --- VALUE ANALYSIS  ---
+        VBox valueAnalysisBox = new VBox(10);
+        valueAnalysisBox.getStyleClass().add("value-analysis-card");
+        valueAnalysisBox.setAlignment(Pos.CENTER);
+
+        // MATHEMATICS FIX: predictBTTSProb already returns decimal (e.g., 0.60)
+        double fairOdd = 1.0 / Math.max(probDecimal, 0.01);
+        double bookieOdd = 1.85; // Default for now
+        double edge = (bookieOdd / fairOdd - 1) * 100;
+
+        Label valueTitle = new Label("BTTS PROFITABILITY ANALYSIS");
+        valueTitle.getStyleClass().add("prediction-title-label");
+
+
+        HBox oddsComparison = new HBox(30);
+        oddsComparison.setAlignment(Pos.CENTER);
+        oddsComparison.getChildren().addAll(
+                createValueIndicator("FAIR ODD", String.format("%.2f", fairOdd), "#58a6ff"),
+                createValueIndicator("BOOKIE ODD", String.format("%.2f", bookieOdd), "#58a6ff")
+        );
+
+        Label profitLabel = new Label();
+        if (bookieOdd > fairOdd) {
+            profitLabel.setText("PROFITABLE BET:   +" + String.format("%.2f%%", edge));
+            profitLabel.setStyle("-fx-text-fill: #238636; -fx-font-weight: bold; -fx-font-size: 16px; -fx-letter-spacing: 3px;");
+        } else {
+            profitLabel.setText("NOT PROFITABLE:   " + String.format("%.2f%%", edge));
+            profitLabel.setStyle("-fx-text-fill: #da3633; -fx-font-weight: bold; -fx-font-size: 16px; -fx-letter-spacing: 3px;");
+        }
+        valueAnalysisBox.getChildren().addAll(valueTitle, oddsComparison, profitLabel);
 
         // --- FORM SECTION (ASYNC) ---
         VBox formContainer = new VBox(10);
@@ -424,38 +476,42 @@ public class BetGui extends Application {
         addVisualRow(grid, "AVG GOALS", stats.getTeamGF(home), stats.getTeamGF(away), 1);
         addVisualRow(grid, "BTTS HISTORY", stats.getBTTS(home), stats.getBTTS(away), 2);
 
-        // ADD ALL TO LAYOUT ONCE
-        detailLayout.getChildren().addAll(backBtn, headerBox, predictionBox, formContainer, grid);
+        // Combine everything in the layout
+        detailLayout.getChildren().addAll(backBtn, headerBox, predictionBox, valueAnalysisBox, formContainer, grid);
 
-        // SWITCH VIEW IMMEDIATELY
-        stack.getChildren().setAll(detailLayout);
+        // --- SCROLLBAR FIX ---
+        // Wrap detailLayout in a ScrollPane to allow vertical movement
+        ScrollPane scrollWrapper = new ScrollPane(detailLayout);
+        scrollWrapper.setFitToWidth(true); // Ensures the width fits the window
+        scrollWrapper.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Hide horizontal scroll
+        scrollWrapper.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
-        // FETCH DATA IN BACKGROUND
-        final String homeTeamFinal = home;
-        final String awayTeamFinal = away;
+        // Set the scrollable view to the main stack
+        stack.getChildren().setAll(scrollWrapper);
+
+        final String homeFinal = home;
+        final String awayFinal = away;
+
+        // Fetch form data in the background
         new Thread(() -> {
             HistoricalDataService history = new HistoricalDataService();
-
-            List<HistoricalDataService.MatchResult> homeF = history.getTeamForm(homeTeamFinal);
-            List<HistoricalDataService.MatchResult> awayF = history.getTeamForm(awayTeamFinal);
+            // Use final copies here
+            List<HistoricalDataService.MatchResult> homeF = history.getTeamForm(homeFinal);
+            List<HistoricalDataService.MatchResult> awayF = history.getTeamForm(awayFinal);
 
             Platform.runLater(() -> {
                 formContainer.getChildren().clear();
                 Label formTitle = new Label("LAST 5 MATCHES PERFORMANCE");
                 formTitle.setStyle("-fx-text-fill: #c9d1d9; -fx-font-weight: 800; -fx-font-size: 13px;");
 
-                List<String> homeLetters = homeF.stream().map(HistoricalDataService.MatchResult::res).toList();
-                List<String> awayLetters = awayF.stream().map(HistoricalDataService.MatchResult::res).toList();
-
-                if (homeLetters.isEmpty() && awayLetters.isEmpty()) {
+                if (homeF.isEmpty() && awayF.isEmpty()) {
                     Label err = new Label("No data available (Rate Limit reached?)");
-                    err.setStyle("-fx-text-fill: #cf222e; -fx-font-size: 10px;");
+                    err.setStyle("-fx-text-fill: #cf222e;");
                     formContainer.getChildren().addAll(formTitle, err);
                 } else {
-                    formContainer.getChildren().addAll(
-                            formTitle,
-                            createFormRow(homeTeamFinal, homeLetters),
-                            createFormRow(awayTeamFinal, awayLetters)
+                    formContainer.getChildren().addAll(formTitle,
+                            createFormRow(homeFinal, homeF.stream().map(r -> r.res()).toList()),
+                            createFormRow(awayFinal, awayF.stream().map(r -> r.res()).toList())
                     );
                 }
             });
@@ -516,6 +572,17 @@ public class BetGui extends Application {
         }
         container.getChildren().addAll(nameLabel, circles);
         return container;
+    }
+
+    // helper method for pretty icons for compairng bets with mathematics
+    private VBox createValueIndicator(String title, String value, String color) {
+        Label t = new Label(title);
+        t.setStyle("-fx-text-fill: #8b949e; -fx-font-size: 12px; -fx-font-weight: bold; -fx-letter-spacing: 3px;");
+        Label v = new Label(value);
+        v.setStyle("-fx-text-fill: " + color + "; -fx-font-size: 22px; -fx-font-weight: 900; -fx-letter-spacing: 3px;");
+        VBox box = new VBox(2, t, v);
+        box.setAlignment(Pos.CENTER);
+        return box;
     }
 
     public static void main(String[] args) { launch(args); }

@@ -57,7 +57,7 @@
 .card-name {
     -fx-text-fill: #f0f6fc;        /* Off-white color for team names */
     -fx-font-weight: 800;          /* Bold weight for better readability */
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
 }
 
 .card-stats {

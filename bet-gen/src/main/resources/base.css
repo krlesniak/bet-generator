@@ -1,7 +1,7 @@
 /* --- GLOBAL STYLES --- */
 .root {
     -fx-background-color: #0b0e14; /* Set the main background color of the application */
-    -fx-font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; /* Define the font stack for the entire UI */
+   -fx-font-family: "Inter Medium"; /* Define the font stack for the entire UI */
 }
 
 /* --- HEADER SECTION --- */
@@ -57,4 +57,23 @@
 
 .separator .line {
     -fx-border-color: #30363d;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-width: 8px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
 }

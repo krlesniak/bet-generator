@@ -104,3 +104,20 @@
 .form-w { -fx-background-color: #238636; } /* Win - Green */
 .form-l { -fx-background-color: #cf222e; } /* Loss - Red */
 .form-d { -fx-background-color: #8b949e; } /* Draw - Gray */
+
+/* --- VALUE ANALYSIS --- */
+.value-analysis-card {
+    -fx-background-color: rgba(88, 166, 255, 0.05);
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #8b949e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
+}
+
+.prediction-title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-letter-spacing: 3px;
+}

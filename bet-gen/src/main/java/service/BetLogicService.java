@@ -140,11 +140,11 @@ public class BetLogicService {
                 // BTTS info
                 double bttsProb = statsService.predictBTTSProb(smart.match().getHomeTeam(), smart.match().getAwayTeam());
                 int bttsPercent = (int) (bttsProb * 100);
-                String bttsInfo = " {BTTS: " + bttsPercent + "%}";
+                String bttsInfo = " [BTTS: " + bttsPercent + "%]";
 
                 // super safe and high goals info in good matches
-                if (smart.option().getPrice() < 1.40) displayType += " (super safe)";
-                else if (displayType.contains("Over 2.5") && smart.score > 3.0) displayType += " (high goals)";
+                if (smart.option().getPrice() < 1.40) displayType += "  {super safe}";
+                else if (displayType.contains("Over 2.5") && smart.score > 3.0) displayType += "  {high goals}";
 
                 String finalDisplayName = matchKey + " (" + dateStr + ") [" + displayType + "]" + bttsInfo;
 

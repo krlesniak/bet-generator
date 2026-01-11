@@ -43,3 +43,5 @@ build/
 cache_soccer_*
 team_form_cache.json
 team_ids_cache.json
+BetAIDashboard.app
+out

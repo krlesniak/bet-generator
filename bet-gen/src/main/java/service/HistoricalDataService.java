@@ -2,7 +2,6 @@ package service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -19,11 +18,19 @@ public class HistoricalDataService {
     private final String baseUrl = "https://v3.football.api-sports.io/";
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
-    private static final String ID_CACHE_FILE = "team_ids_cache.json";
-    private static final String FORM_CACHE_FILE = "team_form_cache.json";
+    // dynamic paths
+    private static String getWorkDir() {
+        String path = System.getProperty("user.home") + "/.betaidashboard/";
+        java.io.File dir = new java.io.File(path);
+        if (!dir.exists()) dir.mkdirs();
+        return path;
+    }
 
     private static Map<String, Integer> teamIdCache = new HashMap<>();
     private static JSONObject formCache = new JSONObject();
+
+    private static final String ID_CACHE_FILE = getWorkDir() + "team_ids_cache.json";
+    private static final String FORM_CACHE_FILE = getWorkDir() + "team_form_cache.json";;
 
     public HistoricalDataService() {
         loadCaches();
@@ -90,6 +97,7 @@ public class HistoricalDataService {
     private List<MatchResult> fetchFixturesFromApi(int teamId, int season) throws Exception {
         List<MatchResult> results = new ArrayList<>();
         String url = baseUrl + "fixtures?team=" + teamId + "&season=" + season;
+        // String url = baseUrl + "fixtures?team=" + teamId + "&last=10";
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url)).header("x-apisports-key", apiKey).GET().build();
