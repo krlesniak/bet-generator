@@ -10,7 +10,7 @@
 
 ## 📸 Dashboard Preview
 
-|                             Main Interface                              | Match Detail Analysis |
+|                            Generated Coupon                             | Match Detail Analysis |
 |:-----------------------------------------------------------------------:|:---:|
 | ![Main Dashboard](bet-gen/src/main/resources/images/main_dashboard.png) | ![Detail View](bet-gen/src/main/resources/images/match_details.png) |
 |               *Modern Dark Mode UI with real-time stats*                | *Deep-dive into team form and xG* |
