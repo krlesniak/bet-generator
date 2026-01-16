@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class HistoricalDataService {
     public record MatchResult(String res, String score, String opponent, long timestamp) {}
 
-    private final String apiKey = "cb0eba30e31501d7cc861a7e9f3b0e6e";
+    private final String apiKey = ConfigLoader.getProperty("football.api.key");
     private final String baseUrl = "https://v3.football.api-sports.io/";
     private final HttpClient httpClient = HttpClient.newHttpClient();
 

@@ -25,8 +25,8 @@
 .btn-primary {
     -fx-background-color: #21262d; /* Apply a blue gradient background */
     -fx-text-fill: #c9d1d9;          /* Set the text color to pure white */
-     -fx-border-color: #30363d;     /* Set the border color for secondary buttons */
-     -fx-border-radius: 8;          /* Match the border radius to the background radius */
+    -fx-border-color: #30363d;     /* Set the border color for secondary buttons */
+    -fx-border-radius: 8;          /* Match the border radius to the background radius */
 }
 
 .btn-primary:hover {
@@ -34,6 +34,80 @@
     -fx-text-fill: #f0f6fc;        /* Brighten text color during mouse hover */
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
+}
+
+/* --- CHAT BOT WINDOW  ---*/
+.ai-button {
+    -fx-background-radius: 75;
+    -fx-min-width: 60;
+    -fx-min-height: 60;
+    -fx-font-size: 24;
+    -fx-background-color: #21262d;
+    -fx-cursor: hand;
+}
+
+.ai-button:hover {
+    -fx-background-color: #8b949e; /* Brighten gradient on hover */
+    -fx-text-fill: #f0f6fc;        /* Brighten text color during mouse hover */
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+}
+
+/* --- CHAT WINDOW --- */
+.chat-text {
+    -fx-control-inner-background: #161b22;
+    -fx-text-fill: #c9d1d9;
+    -fx-background-color: #161b22;
+    -fx-border-color: #30363d;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 15px;
+    -fx-padding: 5;
+}
+
+/* --- SCROLLBAR --- */
+.chat-text .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-width: 8px;
+    -fx-padding: 0 1 0 0;
+}
+
+.chat-text .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.chat-text .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+}
+
+.chat-text .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
+
+.chat-text .scroll-bar:vertical .increment-button,
+.chat-text .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* effects for chat */
+
+.text-field:hover {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 10, 0, 0, 0);
+}
+.text-field:focused {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 10, 0, 0, 0);
+}
+
+.back-button:hover {
+    -fx-text-fill: #58a6ff;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
 }
 
 /* --- THE COUPON STYLE (FOR EACH MATCH) --- */
@@ -105,7 +179,7 @@
     -fx-font-size: 22px;
     -fx-font-weight: 800;
     -fx-text-fill: #58a6ff; /* grey -> #c9d1d9*/
-    -fx-padding: 15 30;
+    -fx-padding: 10 30;
     -fx-background-color: linear-gradient(to right, #0d1117, #1c2128);
     -fx-background-radius: 12;
     -fx-border-color: #484f58;

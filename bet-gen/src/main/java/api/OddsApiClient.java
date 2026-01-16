@@ -1,12 +1,14 @@
 package api;
 
+import service.ConfigLoader;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class OddsApiClient {
-    private static final String API_KEY = "3a933e9bf8a663e3123b7e84edb6a801";
+    private static final String API_KEY = ConfigLoader.getProperty("bet.api.key");
 
     // &bookmakers=betclic_fr,pinnacle, betclic is being taken first
     private static final String BASE_URL = "https://api.the-odds-api.com/v4/sports/%s/odds/" +

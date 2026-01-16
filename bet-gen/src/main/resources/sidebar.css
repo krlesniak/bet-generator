@@ -16,7 +16,7 @@
     -fx-font-size: 11px;           /* Set a small font size for section headers */
     -fx-font-weight: 800;          /* Set an extra bold weight for section headers */
     -fx-text-fill: #58a6ff;        /* Apply an electric blue color for the header accent */
-    -fx-padding: 0 0 12 0;         /* Add 12px of spacing below the header */
+    -fx-padding: 0 0 8 0;         /* Add 12px of spacing below the header */
 }
 
 /* --- INPUT FIELDS & COMBO BOX --- */
@@ -34,6 +34,12 @@
     -fx-text-fill: white;
     -fx-background-color: transparent;
     -fx-background-radius: 8;
+}
+
+.combo-box:hover {
+    -fx-border-color: #58a6ff;
+    -fx-effect: dropshadow(gaussian, rgba(88, 166, 255, 0.2), 15, 0, 0, 0);     /* blue glow */
+    -fx-cursor: hand;
 }
 
 /* --- COMBO BOX DROPDOWN --- */

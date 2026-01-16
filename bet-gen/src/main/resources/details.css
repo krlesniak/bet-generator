@@ -24,6 +24,8 @@
     -fx-padding: 0 0 15 0;
     -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
     -fx-border-width: 0 0 2 0;
+    -fx-alignment: CENTER_LEFT;
+
 }
 
 .detail-date-label {
@@ -31,13 +33,13 @@
     -fx-font-size: 14px;
     -fx-font-weight: 800;
     -fx-letter-spacing: 2px;
-    -fx-alignment: CENTER;
+    -fx-alignment: CENTER_LEFT;
 }
 
 .detail-title-text {
     -fx-font-size: 24px;
     -fx-text-fill: #c9d1d9;
-    -fx-alignment: CENTER;
+    -fx-alignment: CENTER_LEFT;
     -fx-font-weight: 800;
 }
 
