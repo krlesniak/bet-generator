@@ -20,9 +20,6 @@ import service.StatsService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static api.CacheManager.loadCache;
-import static api.CacheManager.saveCache;
-
 public class BetGui extends Application {
     private OddsApiClient client;
     private DataParser parser;
@@ -126,7 +123,14 @@ public class BetGui extends Application {
         mainListView.getItems().setAll("INFO:Checking cache & downloading data...");
         new Thread(() -> {
             try {
-                List<String> leagueKeys = List.of("soccer_epl", "soccer_spain_la_liga", "soccer_italy_serie_a", "soccer_germany_bundesliga", "soccer_france_ligue_one");
+                List<String> leagueKeys = List.of(
+                        "soccer_epl",
+                        "soccer_spain_la_liga",
+                        "soccer_italy_serie_a",
+                        "soccer_germany_bundesliga",
+                        "soccer_france_ligue_one",
+                        "soccer_uefa_champs_league"
+                );
                 allMatches.clear();
 
                 for (String key : leagueKeys) {

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import org.json.JSONArray;
 
 public class CacheManager {
-    private static final long CACHE_DURATION_MS = 60 * 60 * 1000; // 60 minutes
+    private static final long CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 60 minutes
 
     // safe path to save
     private static Path getSafePath(String leagueKey) {
@@ -47,7 +47,6 @@ public class CacheManager {
             fixedData = data;
         }
 
-        // Zapisujemy do bezpiecznej ścieżki zamiast do folderu aplikacji
         Files.writeString(getSafePath(leagueKey), fixedData);
         System.out.println(">>> Saved data to secure user path: " + leagueKey);
     }

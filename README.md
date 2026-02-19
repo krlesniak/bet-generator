@@ -54,14 +54,23 @@
 
 ## 📦 Installation & Setup
 
-1. **API Keys Configuration**:
-   Create `application.properties` in `src/main/resources/`:
-   ```properties
-   bet.api.key=YOUR_ODDS_API_KEY
-   gemini.api.key=YOUR_GEMINI_API_KEY
-   football.api.key = YOUR_MATCH_HISTORY_API_KEY
-2. **Build Process**:
+To run this application, you need to obtain API keys from the following providers:
+
+1. **Betting Odds**: Register at [The Odds API](https://the-odds-api.com/).
+2. **Historical Stats**: Obtain an API key for **API-Football** via [RapidAPI](https://rapidapi.com/api-sports/api/api-football/).
+3. **AI Insights**: Obtain a Gemini AI key from [Google AI Studio](https://aistudio.google.com/).
+
+### Configuration
+Create a file named `application.properties` in `src/main/resources/` and fill in your keys:
+```properties
+bet.api.key=YOUR_ODDS_API_KEY
+football.api.key=YOUR_RAPIDAPI_KEY
+gemini.api.key=YOUR_GEMINI_API_KEY
+```
+
+### Build Process
    In IntelliJ IDEA, navigate to: Build -> Build Artifacts -> Rebuild.
-3. **Deployment (macOS)**: Run the automated update script from your terminal:
+### Deployment (macOS) 
+   Run the automated update script from your terminal:
    ```Bash
    ./update_app.sh

@@ -1,4 +1,6 @@
 TeamName,AvgTotalGoals,BTTS_Rate,WinRate
+
+# --- PREMIER LEAGUE ---
 Manchester United,3.1,0.58,0.42
 Manchester City,3.6,0.63,0.50
 Liverpool,3.8,0.63,0.50
@@ -21,6 +23,8 @@ Leicester City,2.8,0.55,0.15
 Ipswich Town,3.5,0.60,0.15
 Southampton,3.6,0.65,0.12
 Leeds United,2.7,0.55,0.10
+
+# --- SERIE A ---
 Inter Milan,3.0,0.27,0.64
 Napoli,2.4,0.45,0.64
 AC Milan,2.5,0.45,0.72
@@ -41,9 +45,11 @@ Genoa,2.2,0.55,0.18
 Lecce,1.7,0.27,0.18
 Pisa,2.3,0.36,0.09
 Cremonese,2.4,0.60,0.18
+
+# --- LA LIGA  ---
 Barcelona,3.5,0.55,0.85
 Real Madrid,2.6,0.44,0.78
-Atletico Madrid,2.5,0.58,0.65
+Atlético Madrid,2.5,0.58,0.65
 Villarreal,2.8,0.50,0.62
 Athletic Bilbao,2.4,0.48,0.55
 Real Betis,2.3,0.60,0.50
@@ -61,7 +67,9 @@ Alavés,2.0,0.45,0.25
 Levante,2.7,0.55,0.22
 Elche CF,1.9,0.45,0.18
 Real Oviedo,1.8,0.35,0.15
-Paris Saint-Germain,3.2,0.38,0.88
+
+# --- LEAGUE ONE ---
+Paris Saint Germain,3.2,0.38,0.88
 Marseille,3.4,0.65,0.68
 Lyon,2.9,0.58,0.62
 Lens,2.7,0.45,0.65
@@ -79,6 +87,8 @@ Le Havre,2.1,0.42,0.28
 Metz,2.6,0.48,0.25
 Angers,2.3,0.45,0.22
 Paris FC,2.9,0.68,0.31
+
+# --- BUNDESLIGA ---
 Bayern Munich,4.2,0.55,0.88
 Bayer Leverkusen,3.3,0.60,0.78
 Borussia Dortmund,3.2,0.65,0.70
@@ -97,3 +107,32 @@ Augsburg,2.8,0.58,0.32
 FC St. Pauli,2.5,0.55,0.22
 Hamburger SV,2.7,0.60,0.25
 FC Heidenheim,2.4,0.48,0.28
+
+# --- CHAMPIONS LEAGUE ---
+# Portugal
+Benfica,2.42,0.81,0.44
+Sporting Lisbon,2.60,0.85,0.42
+
+# Netherlands
+Ajax,1.95,0.47,0.58
+PSV Eindhoven,3.11,0.78,0.62
+
+# Scandinavia & Denmark
+Bodø/Glimt,2.83,0.73,0.58
+FC Copenhagen,1.67,0.44,0.55
+
+# Belgium
+Club Brugge,1.81,0.62,0.52
+Union Saint-Gilloise,1.76,0.72,0.38
+
+# Turkey & Greece
+Galatasaray,2.22,0.72,0.50
+Olympiacos Piraeus,2.06,0.75,0.40
+
+# Eastern Europe & Asia
+Qarabağ,2.46,0.72,0.45
+FC Kairat,2.04,0.69,0.42
+Slavia Praha,2.20,0.83,0.44
+
+# Cyprus
+Pafos FC,2.10,0.70,0.45

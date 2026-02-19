@@ -8,7 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class OddsApiClient {
-    private static final String API_KEY = ConfigLoader.getProperty("bet.api.key");
+    private static final String API_KEY = ConfigLoader.getProperty("bet.api.key.v2");
 
     // &bookmakers=betclic_fr,pinnacle, betclic is being taken first
     private static final String BASE_URL = "https://api.the-odds-api.com/v4/sports/%s/odds/" +
