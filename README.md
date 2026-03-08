@@ -73,4 +73,4 @@ gemini.api.key=YOUR_GEMINI_API_KEY
 ### Deployment (macOS) 
    Run the automated update script from your terminal:
    ```Bash
-   ./update_app.sh
+      bash path_to_file/update_app.sh
