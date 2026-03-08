@@ -27,15 +27,56 @@ public class ChatView extends VBox {
 
         // --- GEMINI UI STYLE ---
         String styleCss = "<style>" +
-                "body { background-color: #131314; color: #e3e3e3; font-family: 'Inter', 'Segoe UI', sans-serif; padding: 20px; line-height: 1.6; scroll-behavior: smooth; }" +
-                ".message-container { display: flex; flex-direction: column; gap: 24px; max-width: 800px; margin: 0 auto; }" +
-                ".user-box { align-self: flex-end; background-color: #2b2b2b; padding: 12px 20px; border-radius: 20px; max-width: 80%; border-bottom-right-radius: 4px; color: #fff; font-size: 0.95em; }" +
-                ".ai-box { align-self: flex-start; max-width: 95%; font-size: 1.05em; }" +
-                ".ai-label { color: #8ab4f8; font-weight: 600; font-size: 0.8em; text-transform: uppercase; margin-bottom: 8px; display: block; letter-spacing: 1px; }" +
-                "h3 { color: #fff; margin: 15px 0 10px 0; font-size: 1.2em; }" +
+                "body { " +
+                "  background: radial-gradient(circle at top, #1a1a1c 0%, #050505 100%); " +
+                "  color: #e3e3e3; " +
+                "  font-family: 'Inter', 'Segoe UI', sans-serif; " +
+                "  padding: 20px; " +
+                "  line-height: 1.6; " +
+                "  scroll-behavior: smooth; " +
+                "}" +
+                "::-webkit-scrollbar { width: 6px; } " +
+                "::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } " +
+                ".message-container { " +
+                "  display: flex; " +
+                "  flex-direction: column; " +
+                "  gap: 28px; " +
+                "  max-width: 850px; " +
+                "  margin: 0 auto; " +
+                "}" +
+                ".user-box { " +
+                "  align-self: flex-end; " +
+                "  background: linear-gradient(135deg, #2b2b2d 0%, #1c1c1e 100%); " +
+                "  padding: 14px 22px; " +
+                "  border-radius: 18px; " +
+                "  max-width: 75%; " +
+                "  border-bottom-right-radius: 4px; " +
+                "  border: 1px solid #3a3a3c; " +
+                "  color: #ffffff; " +
+                "  font-size: 0.95em; " +
+                "  box-shadow: 0 4px 15px rgba(0,0,0,0.4); " +
+                "}" +
+                ".ai-box { " +
+                "  align-self: flex-start; " +
+                "  max-width: 95%; " +
+                "  font-size: 1.05em; " +
+                "  border-left: 2px solid #8ab4f8; " +
+                "  padding-left: 15px; " +
+                "}" +
+                ".ai-label { " +
+                "  color: #8ab4f8; " +
+                "  font-weight: 600; " +
+                "  font-size: 0.85em; " +
+                "  text-transform: uppercase; " +
+                "  margin-bottom: 10px; " +
+                "  display: block; " +
+                "  letter-spacing: 1.2px; " +
+                "  text-shadow: 0 0 10px rgba(138, 180, 248, 0.3); " +
+                "}" +
+                "h3 { color: #ffffff; margin: 18px 0 12px 0; font-size: 1.25em; border-bottom: 1px solid #333; padding-bottom: 5px; }" +
                 "b { color: #8ab4f8; font-weight: 600; }" +
-                "li { margin-bottom: 8px; }" +
-                "hr { border: 0; border-top: 1px solid #3c4043; margin: 20px 0; }" +
+                "li { margin-bottom: 10px; list-style-type: none; border-left: 1px solid #333; padding-left: 10px; }" +
+                "hr { border: 0; border-top: 1px solid #2d2d2d; margin: 25px 0; }" +
                 "</style>";
 
         String baseHtml = "<html><head>" + styleCss + "</head><body>" +
