@@ -18,7 +18,7 @@ public class BetLogicService {
     public List<BetOption> generateSmartCoupon(List<Match> matches, double targetOdd, RiskLevel riskLevel) {
         List<SmartOption> candidates = new ArrayList<>();
         LocalDate today = LocalDate.now();
-        LocalDate threeDays = today.plusDays(2);
+        LocalDate threeDays = today.plusDays(1);
 
         System.out.println(">>> Starting analysis " + matches.size() + " matches (3 days)...");
 
@@ -187,7 +187,7 @@ public class BetLogicService {
         ));
 
         LocalDate today = LocalDate.now();
-        LocalDate threeDays = today.plusDays(2);
+        LocalDate threeDays = today.plusDays(1);
 
         for (Match m : matches) {
             LocalDate matchDate = m.getTime().toLocalDate();

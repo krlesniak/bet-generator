@@ -24,6 +24,10 @@ public class StatsService {
     private String cleanName(String name) {
         if (name == null) return "";
         return name.toLowerCase()
+                .replace("hnk ", "")
+                .replace("tc ", "")
+                .replace("sc ", "")
+                .replace("krc ", "")
                 .replace("fc ", "")
                 .replace(" fc", "")
                 .replace("cf ", "")

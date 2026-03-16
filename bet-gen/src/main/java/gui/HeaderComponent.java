@@ -16,7 +16,7 @@ public class HeaderComponent extends HBox {
         soccerIcon.setPreserveRatio(true);
 
         // --- title ---
-        Label titleText = new Label("Bet Krzysztof Generator");
+        Label titleText = new Label("Bet Generator");
         titleText.getStyleClass().add("main-title");
 
         // --- connecting text and icon ---
