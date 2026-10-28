@@ -1,79 +1,132 @@
-/* --- GLOBAL STYLES --- */
+/* ==========================================================================
+   SCORIFY THEME - BASE STYLESHEET
+   Deep Obsidian, Emerald Ambient Aura, Frosted Glass & Precision Typography
+   ========================================================================== */
+
+/* --- ROOT APPLICATION CONFIGURATION --- */
 .root {
-    -fx-background-color: #0b0e14; /* Set the main background color of the application */
-   -fx-font-family: "Inter Medium"; /* Define the font stack for the entire UI */
+    /* Emerald ambient aura fading into deep obsidian */
+    -fx-background-color: radial-gradient(center 50% -15%, radius 110%, #0d3831 0%, #071e1a 30%, #050b0d 70%, #030607 100%);
+    -fx-font-family: "Inter Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -fx-text-fill: #e8f3f4;
 }
 
-/* --- HEADER SECTION --- */
+/* --- TOP HEADER BAR --- */
 .top-bar {
-    -fx-background-color: #161b22; /* Set the background color for the top header bar */
-    -fx-padding: 18 30;             /* Set vertical and horizontal internal padding */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 12, 0, 0, 2); /* Apply an outer shadow for depth */
-    -fx-border-color: #30363d;     /* Set the color of the header border */
-    -fx-border-width: 0 0 1 0;     /* Apply a 1px border only to the bottom of the header */
+    -fx-background-color: rgba(7, 13, 15, 0.7);
+    -fx-padding: 14 26;
+    -fx-border-color: rgba(30, 52, 56, 0.6);
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 16, 0, 0, 4);
 }
 
 .main-title {
-    -fx-font-size: 25px;           /* Set the font size for the main application title */
-    -fx-font-weight: 800;          /* Set the font weight to extra bold */
-    -fx-text-fill: #f0f6fc;        /* Set the text color to an off-white shade */
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #ffffff;
+    -fx-letter-spacing: 1.2px;
 }
 
-/* --- LIST VIEW RESULTS  --- */
+.main-subtitle {
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #78999e;
+    -fx-letter-spacing: 0.6px;
+}
+
+.brand-badge {
+    -fx-background-color: rgba(45, 212, 191, 0.12);
+    -fx-border-color: rgba(45, 212, 191, 0.4);
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 2 8;
+    -fx-text-fill: #2dd4bf;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 0.8px;
+}
+
+.header-pill {
+    -fx-background-color: rgba(16, 28, 31, 0.8);
+    -fx-border-color: rgba(35, 62, 66, 0.6);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5 14;
+    -fx-text-fill: #8ba9ad;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.live-dot {
+    -fx-text-fill: #00f5b8;
+    -fx-font-size: 10px;
+}
+
+/* --- RESULTS LIST VIEW --- */
 .results-list {
-    -fx-background-color: transparent; /* Remove default ListView background */
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-padding: 5;
+    -fx-padding: 4 2 4 0;
 }
 
 .results-list .virtual-flow {
-    -fx-background-color: #0b0e14; /* Match main navy background */
-}
-
-/* --- LIST CELL TWEAKS --- */
-.list-cell {
-    -fx-background-color: transparent; /* Ensure items don't have default backgrounds */
-    -fx-padding: 5 0;                   /* Vertical gap between cards */
-}
-
-.list-cell:selected {
-    -fx-background-color: transparent; /* Disable the standard blue selection bar */
-}
-
-/* --- SCROLLBARS --- */
-.results-list .scroll-bar:vertical, .results-list .scroll-bar:horizontal {
     -fx-background-color: transparent;
 }
 
-.results-list .scroll-bar:horizontal {
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5 0;
+}
+
+.list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.list-cell:focused {
+    -fx-background-color: transparent;
+}
+
+/* --- SLEEK MINIMAL SCROLLBARS --- */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 6px;
+    -fx-max-width: 6px;
+}
+
+.scroll-bar:horizontal {
     -fx-opacity: 0;
-    -fx-padding: -10;              /* Effectively hides the bar space */
+    -fx-pref-height: 0;
+    -fx-padding: -10;
 }
 
-.results-list .scroll-bar .thumb {
-    -fx-background-color: #30363d;
-    -fx-background-radius: 10;
+.scroll-bar .thumb {
+    -fx-background-color: rgba(45, 212, 191, 0.2);
+    -fx-background-radius: 10px;
 }
 
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(0, 245, 184, 0.6);
+}
+
+.scroll-bar .track, .scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* --- SEPARATORS --- */
 .separator .line {
-    -fx-border-color: #30363d;
+    -fx-border-color: rgba(30, 52, 56, 0.6);
+    -fx-border-width: 1 0 0 0;
 }
 
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-}
-
-.scroll-bar:vertical {
-    -fx-background-color: transparent;
-    -fx-width: 8px;
-}
-
-.scroll-bar:vertical .thumb {
-    -fx-background-color: rgba(255, 255, 255, 0.2);
-    -fx-background-radius: 10px;
-}
-
-.scroll-bar:vertical .thumb:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.4);
+    -fx-background-insets: 0;
 }

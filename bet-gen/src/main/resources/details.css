@@ -1,125 +1,194 @@
-/* ----- NEW WINDOW WITH STATS -----*/
+/* ==========================================================================
+   SCORIFY THEME - MATCH DETAILS & ANALYTICS STYLESHEET
+   Frosted Glass KPI Cards, Dual-Sided Mint Bars & Circular Form Tokens
+   ========================================================================== */
 
-/* Container for the match detail view */
+/* Main Container */
 .detail-container {
-    -fx-background-color: #0d1117;
-    -fx-padding: 30;
+    -fx-background-color: transparent;
+    -fx-padding: 20;
 }
 
-/* Gray back button with hover effect */
+/* Back Navigation Button */
 .back-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #8b949e;
+    -fx-background-color: #101c1f;
+    -fx-border-color: #1a3134;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: #78999e;
     -fx-font-weight: 800;
+    -fx-font-size: 12px;
     -fx-cursor: hand;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 8 16;
 }
 
 .back-button:hover {
-    -fx-text-fill: white;
+    -fx-background-color: #14282b;
+    -fx-border-color: #2dd4bf;
+    -fx-text-fill: #2dd4bf;
 }
 
-/* Header with the blue gradient underline */
+/* Header Matchup Banner */
 .detail-header-box {
-    -fx-padding: 0 0 15 0;
-    -fx-border-color: linear-gradient(to right, transparent, #58a6ff, transparent);
-    -fx-border-width: 0 0 2 0;
-    -fx-alignment: CENTER_LEFT;
-
+    -fx-background-color: linear-gradient(to bottom right, #111c1e 0%, #091012 100%);
+    -fx-border-color: #1a2f32;
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
+    -fx-padding: 20 28;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 16, 0, 0, 3);
 }
 
 .detail-date-label {
-    -fx-text-fill: #8b949e;
-    -fx-font-size: 14px;
+    -fx-text-fill: #2dd4bf;
+    -fx-font-size: 11px;
     -fx-font-weight: 800;
-    -fx-letter-spacing: 2px;
-    -fx-alignment: CENTER_LEFT;
+    -fx-letter-spacing: 1.2px;
 }
 
 .detail-title-text {
     -fx-font-size: 24px;
-    -fx-text-fill: #c9d1d9;
-    -fx-alignment: CENTER_LEFT;
+    -fx-font-weight: 900;
+    -fx-text-fill: #ffffff;
+    -fx-letter-spacing: 0.5px;
+}
+
+/* --- KPI CARDS --- */
+.detail-kpi-card {
+    -fx-background-color: linear-gradient(to bottom right, #101c1f 0%, #091012 100%);
+    -fx-border-color: #1a3134;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 18 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0, 0, 2);
+}
+
+.detail-kpi-card:hover {
+    -fx-border-color: #2dd4bf;
+}
+
+.kpi-title {
+    -fx-text-fill: #78999e;
+    -fx-font-size: 11px;
     -fx-font-weight: 800;
+    -fx-letter-spacing: 1.5px;
 }
 
-/* Grid layout for stats */
-.stats-grid {
-    -fx-hgap: 50;
-    -fx-vgap: 25;
-    -fx-padding: 30 0 0 0;
+.kpi-value-prob {
+    -fx-text-fill: #00f5b8;
+    -fx-font-size: 32px;
+    -fx-font-weight: 900;
 }
 
-.stats-row-label {
-    -fx-text-fill: #8b949e;
-    -fx-font-size: 12px;
-    -fx-font-weight: 800;
-}
-
-.stats-row-value {
-    -fx-text-fill: white;
-    -fx-font-size: 18px;
+.kpi-subtext {
+    -fx-text-fill: #547276;
+    -fx-font-size: 11px;
     -fx-font-weight: 700;
 }
 
-/* -- DETAILS ---*/
-
-/* Progress bar container */
-.stat-bar-bg {
-    -fx-background-color: #30363d;
-    -fx-min-height: 4;
-    -fx-max-height: 4;
-    -fx-background-radius: 2;
-}
-
-/* The actual fill of the bar */
-.stat-bar-fill {
-    -fx-background-color: #58a6ff;
-    -fx-background-radius: 2;
-    -fx-min-height: 4;
-    -fx-max-height: 4;
-}
-
-/* Prediction card in the middle */
-.prediction-card {
-    -fx-background-color: rgba(88, 166, 255, 0.05);
-    -fx-border-color: #8b949e;
+/* Value Edge Badges */
+.edge-badge-profit {
+    -fx-background-color: #072e25;
+    -fx-border-color: #10b981;
     -fx-border-width: 1;
-    -fx-border-radius: 10;
-    -fx-padding: 10;
-    -fx-alignment: CENTER;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 14;
+    -fx-text-fill: #00f5b8;
+    -fx-font-weight: 900;
+    -fx-font-size: 13px;
 }
 
-.prediction-title-label {
-    -fx-text-fill: #c9d1d9;
-    -fx-font-size: 12px;
+.edge-badge-loss {
+    -fx-background-color: #2d0e0e;
+    -fx-border-color: #ef4444;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 14;
+    -fx-text-fill: #f87171;
+    -fx-font-weight: 900;
+    -fx-font-size: 13px;
+}
+
+/* --- STATS COMPARISON MATRIX --- */
+.stats-grid {
+    -fx-hgap: 30;
+    -fx-vgap: 16;
+    -fx-padding: 22 18;
+    -fx-background-color: linear-gradient(to bottom right, #101c1f 0%, #091012 100%);
+    -fx-border-color: #1a3134;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+}
+
+.stats-row-label {
+    -fx-text-fill: #78999e;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1px;
+}
+
+.stats-row-value {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
     -fx-font-weight: 800;
 }
 
-/* --- FORM COLORS --- */
+.stat-bar-bg {
+    -fx-background-color: #0b1517;
+    -fx-min-height: 6;
+    -fx-max-height: 6;
+    -fx-background-radius: 3;
+}
+
+.stat-bar-fill {
+    -fx-background-color: linear-gradient(to right, #00f5b8, #10b981);
+    -fx-background-radius: 3;
+    -fx-min-height: 6;
+    -fx-max-height: 6;
+}
+
+/* --- TEAM FORM SECTION --- */
+.form-section-box {
+    -fx-background-color: linear-gradient(to bottom right, #101c1f 0%, #091012 100%);
+    -fx-border-color: #1a3134;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-padding: 18;
+    -fx-alignment: CENTER;
+}
+
 .form-circle {
     -fx-background-radius: 50;
     -fx-alignment: CENTER;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-min-width: 28;
+    -fx-min-height: 28;
+    -fx-max-width: 28;
+    -fx-max-height: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 6, 0, 0, 1);
 }
 
-.form-w { -fx-background-color: #238636; } /* Win - Green */
-.form-l { -fx-background-color: #cf222e; } /* Loss - Red */
-.form-d { -fx-background-color: #8b949e; } /* Draw - Gray */
-
-/* --- VALUE ANALYSIS --- */
-.value-analysis-card {
-    -fx-background-color: rgba(88, 166, 255, 0.05);
-    -fx-padding: 20px;
-    -fx-background-radius: 15px;
-    -fx-border-color: #8b949e;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
+.form-w {
+    -fx-background-color: #072e25;
+    -fx-border-color: #10b981;
+    -fx-border-width: 1;
+    -fx-border-radius: 50;
 }
 
-.prediction-title-label {
-    -fx-text-fill: white;
-    -fx-font-size: 13px;
-    -fx-font-weight: 900;
-    -fx-letter-spacing: 3px;
+.form-l {
+    -fx-background-color: #2d0e0e;
+    -fx-border-color: #ef4444;
+    -fx-border-width: 1;
+    -fx-border-radius: 50;
+}
+
+.form-d {
+    -fx-background-color: #1e2627;
+    -fx-border-color: #495e61;
+    -fx-border-width: 1;
+    -fx-border-radius: 50;
 }

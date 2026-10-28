@@ -4,9 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
@@ -21,94 +25,119 @@ public class ChatView extends VBox {
     private final WebView webView = new WebView();
 
     public ChatView(StackPane stack, VBox originalView, List<BetOption> lastGeneratedCoupon) {
-        super(15);
+        super(14);
         this.getStyleClass().add("detail-container");
         this.setPadding(new Insets(20));
 
-        // --- GEMINI UI STYLE ---
+        // Top Navigation Bar
+        Button backBtn = new Button("← Back to Dashboard");
+        backBtn.getStyleClass().add("back-button");
+        backBtn.setOnAction(e -> BetGui.animateTransition(stack, originalView));
+
+        Label aiAdvisorTitle = new Label("GEMINI AI BETTING ADVISOR");
+        aiAdvisorTitle.setStyle("-fx-text-fill: #2dd4bf; -fx-font-weight: 900; -fx-font-size: 13px; -fx-letter-spacing: 1.2px;");
+
+        Region topSpacer = new Region();
+        HBox.setHgrow(topSpacer, Priority.ALWAYS);
+
+        Label contextPill = new Label(lastGeneratedCoupon.isEmpty() ? "No Coupon Active" : "Active Coupon (" + lastGeneratedCoupon.size() + " Picks)");
+        contextPill.setStyle(lastGeneratedCoupon.isEmpty()
+                ? "-fx-background-color: #261a09; -fx-border-color: #f59e0b; -fx-text-fill: #fbbf24; -fx-padding: 4 10; -fx-background-radius: 6; -fx-border-radius: 6; -fx-font-size: 10px; -fx-font-weight: 800;"
+                : "-fx-background-color: #072620; -fx-border-color: #10b981; -fx-text-fill: #00f5b8; -fx-padding: 4 10; -fx-background-radius: 6; -fx-border-radius: 6; -fx-font-size: 10px; -fx-font-weight: 800;");
+
+        HBox navRow = new HBox(12, backBtn, topSpacer, aiAdvisorTitle, contextPill);
+        navRow.setAlignment(Pos.CENTER_LEFT);
+
+        // Scorify style WebView
         String styleCss = "<style>" +
                 "body { " +
-                "  background: radial-gradient(circle at top, #1a1a1c 0%, #050505 100%); " +
-                "  color: #e3e3e3; " +
-                "  font-family: 'Inter', 'Segoe UI', sans-serif; " +
-                "  padding: 20px; " +
+                "  background: #080e10; " +
+                "  color: #d3e5e8; " +
+                "  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; " +
+                "  padding: 16px 20px; " +
                 "  line-height: 1.6; " +
-                "  scroll-behavior: smooth; " +
+                "  margin: 0; " +
                 "}" +
                 "::-webkit-scrollbar { width: 6px; } " +
-                "::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } " +
+                "::-webkit-scrollbar-thumb { background: #1a3134; border-radius: 8px; } " +
                 ".message-container { " +
                 "  display: flex; " +
                 "  flex-direction: column; " +
-                "  gap: 28px; " +
+                "  gap: 18px; " +
                 "  max-width: 850px; " +
                 "  margin: 0 auto; " +
                 "}" +
                 ".user-box { " +
                 "  align-self: flex-end; " +
-                "  background: linear-gradient(135deg, #2b2b2d 0%, #1c1c1e 100%); " +
-                "  padding: 14px 22px; " +
-                "  border-radius: 18px; " +
+                "  background: linear-gradient(145deg, #101c1f 0%, #0a1315 100%); " +
+                "  padding: 12px 18px; " +
+                "  border-radius: 14px; " +
+                "  border-bottom-right-radius: 2px; " +
+                "  border: 1px solid #1e383b; " +
+                "  color: #f1f7f8; " +
+                "  font-size: 13.5px; " +
                 "  max-width: 75%; " +
-                "  border-bottom-right-radius: 4px; " +
-                "  border: 1px solid #3a3a3c; " +
-                "  color: #ffffff; " +
-                "  font-size: 0.95em; " +
-                "  box-shadow: 0 4px 15px rgba(0,0,0,0.4); " +
+                "  box-shadow: 0 4px 12px rgba(0,0,0,0.4); " +
                 "}" +
                 ".ai-box { " +
                 "  align-self: flex-start; " +
-                "  max-width: 95%; " +
-                "  font-size: 1.05em; " +
-                "  border-left: 2px solid #8ab4f8; " +
-                "  padding-left: 15px; " +
+                "  background: linear-gradient(145deg, #0e1719 0%, #091012 100%); " +
+                "  border: 1px solid #1a2f32; " +
+                "  border-left: 3px solid #2dd4bf; " +
+                "  border-radius: 14px; " +
+                "  padding: 16px 20px; " +
+                "  max-width: 90%; " +
+                "  font-size: 13.5px; " +
+                "  box-shadow: 0 4px 16px rgba(0,0,0,0.4); " +
                 "}" +
                 ".ai-label { " +
-                "  color: #8ab4f8; " +
-                "  font-weight: 600; " +
-                "  font-size: 0.85em; " +
+                "  color: #2dd4bf; " +
+                "  font-weight: 800; " +
+                "  font-size: 11px; " +
                 "  text-transform: uppercase; " +
-                "  margin-bottom: 10px; " +
-                "  display: block; " +
                 "  letter-spacing: 1.2px; " +
-                "  text-shadow: 0 0 10px rgba(138, 180, 248, 0.3); " +
+                "  margin-bottom: 8px; " +
+                "  display: block; " +
                 "}" +
-                "h3 { color: #ffffff; margin: 18px 0 12px 0; font-size: 1.25em; border-bottom: 1px solid #333; padding-bottom: 5px; }" +
-                "b { color: #8ab4f8; font-weight: 600; }" +
-                "li { margin-bottom: 10px; list-style-type: none; border-left: 1px solid #333; padding-left: 10px; }" +
-                "hr { border: 0; border-top: 1px solid #2d2d2d; margin: 25px 0; }" +
+                "h3 { color: #ffffff; margin: 12px 0 8px 0; font-size: 15px; border-bottom: 1px solid #1a3134; padding-bottom: 4px; }" +
+                "b { color: #00f5b8; font-weight: 700; }" +
+                "li { margin-bottom: 6px; list-style-type: none; border-left: 2px solid #2dd4bf; padding-left: 8px; }" +
                 "</style>";
 
         String baseHtml = "<html><head>" + styleCss + "</head><body>" +
                 "<div id='chat-content' class='message-container'>" +
-                "<div class='ai-box'><span class='ai-label'>Gemini Expert</span>Witaj! W czym mogę Ci dzisiaj pomóc?</div>" +
+                "<div class='ai-box'><span class='ai-label'>Gemini Sports Advisor</span>" +
+                "Witaj! Jestem Twoim analitykiem bukmacherskim AI. Mogę ocenić ryzyko wygenerowanego kuponu, przeanalizować pojedyncze mecze, sprawdzić value bet lub zaproponować bezpieczniejsze alternatywy. Zadaj pytanie poniżej lub kliknij jedną z szybkich opcji.</div>" +
                 "</div><div id='scroll-anchor'></div></body></html>";
 
         webView.getEngine().loadContent(baseHtml);
-        webView.setPrefHeight(500);
+        webView.setPrefHeight(450);
         VBox.setVgrow(webView, Priority.ALWAYS);
 
-        Button backBtn = new Button("← DASHBOARD");
-        backBtn.getStyleClass().add("back-button");
-        backBtn.setOnAction(e -> stack.getChildren().setAll(originalView));
+        // Quick Suggestion Chips
+        HBox suggestionRow = new HBox(8);
+        suggestionRow.setAlignment(Pos.CENTER_LEFT);
+
+        Label promptHint = new Label("Quick Prompts:");
+        promptHint.setStyle("-fx-text-fill: #78999e; -fx-font-size: 11px; -fx-font-weight: 700;");
 
         TextField userInput = new TextField();
-        userInput.setPromptText("Zadaj pytanie ekspertowi...");
+        userInput.setPromptText("Ask AI sports advisor a question...");
         userInput.getStyleClass().add("text-field");
+        HBox.setHgrow(userInput, Priority.ALWAYS);
 
-        userInput.setOnAction(e -> {
-            String question = userInput.getText();
+        Runnable sendAction = () -> {
+            String question = userInput.getText().trim();
             if (question.isEmpty()) return;
             userInput.clear();
 
-            // user message
             addMessageToHtml("user", question);
 
             StringBuilder context = new StringBuilder();
             if (lastGeneratedCoupon.isEmpty()) {
                 context.append("Brak kuponu.");
             } else {
-                context.append("Dane kuponu:\n");
+                context.append("Aktualny kupon:\n");
                 for (BetOption b : lastGeneratedCoupon) {
                     context.append("- ").append(b.getName()).append(" (Kurs: ").append(b.getPrice()).append(")\n");
                 }
@@ -117,18 +146,42 @@ public class ChatView extends VBox {
             new Thread(() -> {
                 String aiAnswer = chatService.getAiResponse(question, context.toString());
                 String formatted = formatMarkdownToHtml(aiAnswer);
-
-                // typing effect
                 Platform.runLater(() -> streamAiResponse(formatted));
             }).start();
-        });
+        };
 
-        this.getChildren().addAll(backBtn, webView, userInput);
+        String[] quickPrompts = {
+                "Zaaudytuj ryzyko tego kuponu",
+                "Który mecz ma największe prawdopodobieństwo BTTS?",
+                "Wskaż najsłabszy typ w kuponie"
+        };
+
+        suggestionRow.getChildren().add(promptHint);
+        for (String q : quickPrompts) {
+            Button chip = new Button(q);
+            chip.getStyleClass().add("preset-chip");
+            chip.setOnAction(e -> {
+                userInput.setText(q);
+                sendAction.run();
+            });
+            suggestionRow.getChildren().add(chip);
+        }
+
+        userInput.setOnAction(e -> sendAction.run());
+
+        Button sendBtn = new Button("Send →");
+        sendBtn.getStyleClass().add("btn-primary");
+        sendBtn.setOnAction(e -> sendAction.run());
+
+        HBox inputRow = new HBox(10, userInput, sendBtn);
+        inputRow.setAlignment(Pos.CENTER_LEFT);
+
+        this.getChildren().addAll(navRow, webView, suggestionRow, inputRow);
     }
 
     private void addMessageToHtml(String role, String text) {
         String divClass = role.equals("user") ? "user-box" : "ai-box";
-        String label = role.equals("user") ? "" : "<span class='ai-label'>Gemini Expert</span>";
+        String label = role.equals("user") ? "" : "<span class='ai-label'>Gemini Sports Advisor</span>";
 
         String script = String.format(
                 "var container = document.getElementById('chat-content');" +
@@ -137,31 +190,28 @@ public class ChatView extends VBox {
                         "div.innerHTML = \"%s%s\";" +
                         "container.appendChild(div);" +
                         "window.scrollTo(0, document.body.scrollHeight);",
-                divClass, label, text.replace("\"", "\\\"").replace("\n", "")
+                divClass, label, text.replace("\"", "\\\"").replace("\n", "<br>")
         );
         webView.getEngine().executeScript(script);
     }
 
     private void streamAiResponse(String fullHtml) {
-        // box for AI answer
         String uniqueId = "ai_" + System.currentTimeMillis();
         webView.getEngine().executeScript(
                 "var container = document.getElementById('chat-content');" +
                         "var div = document.createElement('div');" +
                         "div.className = 'ai-box';" +
-                        "div.innerHTML = \"<span class='ai-label'>Gemini Expert</span><span id='" + uniqueId + "'></span>\";" +
+                        "div.innerHTML = \"<span class='ai-label'>Gemini Sports Advisor</span><span id='" + uniqueId + "'></span>\";" +
                         "container.appendChild(div);"
         );
 
-        // writing simulation
         String[] parts = fullHtml.split("(?=<)|(?<=>)");
         AtomicInteger index = new AtomicInteger(0);
 
         Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(70), e -> {
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(30), e -> {
             if (index.get() < parts.length) {
                 String part = parts[index.getAndIncrement()];
-
                 String escapedPart = part.replace("\"", "\\\"").replace("\n", "");
                 webView.getEngine().executeScript(
                         "document.getElementById('" + uniqueId + "').innerHTML += \"" + escapedPart + "\";" +

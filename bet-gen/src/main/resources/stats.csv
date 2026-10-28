@@ -173,3 +173,38 @@ Rayo Vallecano,1.30,0.38,0.45
 Samsunspor,1.45,0.45,0.50
 Strasbourg,1.50,0.40,0.55
 Rijeka,1.75,0.65,0.45
+
+Fragment kodu
+# --- WORLD CUP QUALIFIERS & INTERNATIONAL TEAMS (2026) ---
+# Format: TeamName,AvgGoals,WinRate,BTTS_Rate
+
+# UEFA (Europe)
+Poland,1.55,0.52,0.48
+France,2.10,0.75,0.50
+England,1.95,0.70,0.45
+Spain,2.05,0.72,0.42
+Germany,2.15,0.65,0.60
+Portugal,2.30,0.78,0.40
+Italy,1.40,0.55,0.38
+Netherlands,2.10,0.68,0.55
+
+# CONMEBOL (South America)
+Argentina,1.85,0.80,0.35
+Brazil,2.00,0.65,0.50
+Uruguay,1.65,0.60,0.45
+Colombia,1.50,0.55,0.42
+
+# CAF (Africa)
+Morocco,1.75,0.70,0.30
+Senegal,1.60,0.65,0.35
+Nigeria,1.80,0.58,0.52
+
+# AFC (Asia)
+Japan,2.40,0.82,0.40
+South Korea,1.90,0.70,0.45
+Australia,1.70,0.62,0.40
+
+# CONCACAF (North America)
+USA,1.85,0.60,0.55
+Mexico,1.60,0.55,0.50
+Canada,1.75,0.58,0.52
